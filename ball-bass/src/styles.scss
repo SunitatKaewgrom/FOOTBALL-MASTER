@@ -1,0 +1,118 @@
+/* You can add global styles to this file, and also import other style files */
+
+// set font family and global styles kanit from google fonts
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap');
+
+body {
+  font-family: 'Kanit', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+a{
+  // remove underline
+  text-decoration: none;
+}
+
+.upload-btn {
+  background-color: indigo;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 0.3rem;
+  cursor: pointer;
+}
+
+.upload {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: left;
+  border: 1px solid #ccc;
+  padding: 1rem;
+  border-radius: 0.3rem;
+  margin-top: 1rem;
+}
+
+.box-1 {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: left;
+  border: 3px solid #ff0000;
+  padding: 1rem;
+  border-radius: 0.3rem;
+  margin-top: 1rem;
+}
+
+.box-0 {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: left;
+  border: 3px solid #0004ff;
+  padding: 1rem;
+  border-radius: 0.3rem;
+  margin-top: 1rem;
+}
+
+.box-2 {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: left;
+  border: 1px solid #00f829;
+  padding: 1rem;
+  border-radius: 0.3rem;
+  margin-top: 1rem;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.top {
+  margin-top: 1rem;
+}
+
+.box-sub-0 {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: left;
+  border: 1px solid #ff00f2;
+  padding: 1rem;
+  border-radius: 0.3rem;
+  margin-top: 1rem;
+}
+
+.box-sub-1 {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: left;
+  border: 1px solid #00ff2a;
+  padding: 1rem;
+  border-radius: 0.3rem;
+  margin-top: 1rem;
+}
+
+.box-sub-2 {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: left;
+  border: 1px solid #ffd000;
+  padding: 1rem;
+  border-radius: 0.3rem;
+  margin-top: 1rem;
+}
+

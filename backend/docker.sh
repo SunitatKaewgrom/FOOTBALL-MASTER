@@ -1,0 +1,2 @@
+docker run --restart=always --name=mysql -e MYSQL_ROOT_PASSWORD=@Devel0per2024 -e MYSQL_DATABASE=db_db -e TZ=Asia/Bangkok -p 3307:3306 -d mysql
+docker run --restart=always --name phpmyadmin -d --link mysql:db -e TZ=Asia/Bangkok -p 7100:80 phpmyadmin/phpmyadmin

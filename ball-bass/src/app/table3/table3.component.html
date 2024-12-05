@@ -1,0 +1,32 @@
+
+<div class="row g-2 mb-2 bg ">
+  <div class="col-4" *ngFor="let item of data">
+    <div class="hot-bg-1 bd-round-tl-tr bd-round-bl-br p-2 text-white">
+      <div class="d-flex justify-content-between align-items-center">
+
+        <div class="d-flex">
+          <div class="avatar avatar-40 border-0 me-2"
+            style="background-image:url('{{imgUrl}}{{item.image}}')"></div>
+          <div>
+            <div class="fs-7">{{item.name}}</div>
+            <div class="text-muted">
+              สถิติ:
+              <label *ngFor="let item2 of item.statistic">
+                <img class="ich-14" *ngIf="item2 == '1'" src="../../../assets/check-icon-2-2.svg" alt="">
+                <img class="ich-14" *ngIf="item2 == '2'" src="../../../assets/cross-icon-2-2.svg" alt="">
+                <img class="ich-14" *ngIf="item2 == '3'" src="../../../assets/minus-icon-2.svg" alt="">
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="hot-bg-2 text-center fs-6 px-2" style="color:#fbf3c5;border-radius: 4px;" class="statistic">{{item.statics}}%</div>
+      </div>
+
+      <div class="d-flex hot-bg-2 text-muted px-2 mt-1 bd-round-tl-tr bd-round-bl-br fs-8">
+        <div class="message" style="color: #bebdb5;">{{item.message}}</div>
+      </div>
+      <div class="fs-7 px-2 text-end">{{item.odds}}</div>
+    </div>
+  </div>
+</div>

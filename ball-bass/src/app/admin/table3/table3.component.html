@@ -1,0 +1,339 @@
+<div class="box">
+  <div class="row">
+    <h3>เพิ่มเซียนบอลทางบ้าน</h3>
+  </div>
+  <div class="row">
+    <div class="col-md-6 top">
+      <div class="form-group">
+        <label for="name"><strong>ชื่อเซียนบอล:</strong></label>
+        <input type="text" id="name" class="form-control" [(ngModel)]="new_data.name" name="name"
+          placeholder="ชื่อเซียนบอลทางบ้าน" required>
+      </div>
+    </div>
+
+    <div class="col-md-12 top">
+      <div class="form-group">
+        <label for="name"><strong>สถิติ</strong>:</label>
+        <div class="row">
+          <div class="col-md-2">
+            <label for="">ครั้งที่ {{1}}</label>
+            <select class="form-control" [(ngModel)]="new_data.statistic[0]" name="statistic" required>
+              <option value="1">ถูก</option>
+              <option value="2">ผิด</option>
+              <option value="3">ไม่ทราบ</option>
+            </select>
+          </div>
+
+          <div class="col-md-2">
+            <label for="">ครั้งที่ {{2}}</label>
+            <select class="form-control" [(ngModel)]="new_data.statistic[1]" name="statistic" required>
+              <option value="1">ถูก</option>
+              <option value="2">ผิด</option>
+              <option value="3">ไม่ทราบ</option>
+            </select>
+          </div>
+
+          <div class="col-md-2">
+            <label for="">ครั้งที่ {{3}}</label>
+            <select class="form-control" [(ngModel)]="new_data.statistic[2]" name="statistic" required>
+              <option value="1">ถูก</option>
+              <option value="2">ผิด</option>
+              <option value="3">ไม่ทราบ</option>
+            </select>
+          </div>
+
+          <div class="col-md-2">
+            <label for="">ครั้งที่ {{4}}</label>
+            <select class="form-control" [(ngModel)]="new_data.statistic[3]" name="statistic" required>
+              <option value="1">ถูก</option>
+              <option value="2">ผิด</option>
+              <option value="3">ไม่ทราบ</option>
+            </select>
+          </div>
+
+          <div class="col-md-2">
+            <label for="">ครั้งที่ {{5}}</label>
+            <select class="form-control" [(ngModel)]="new_data.statistic[4]" name="statistic" required>
+              <option value="1">ถูก</option>
+              <option value="2">ผิด</option>
+              <option value="3">ไม่ทราบ</option>
+            </select>
+          </div>
+
+          <div class="col-md-2">
+            <label for="">ครั้งที่ {{6}}</label>
+            <select class="form-control" [(ngModel)]="new_data.statistic[5]" name="statistic" required>
+              <option value="1">ถูก</option>
+              <option value="2">ผิด</option>
+              <option value="3">ไม่ทราบ</option>
+            </select>
+          </div>
+
+          <div class="col-md-2">
+            <label for="">ครั้งที่ {{7}}</label>
+            <select class="form-control" [(ngModel)]="new_data.statistic[6]" name="statistic" required>
+              <option value="1">ถูก</option>
+              <option value="2">ผิด</option>
+              <option value="3">ไม่ทราบ</option>
+            </select>
+          </div>
+
+          <div class="col-md-2">
+            <label for="">ครั้งที่ {{8}}</label>
+            <select class="form-control" [(ngModel)]="new_data.statistic[7]" name="statistic" required>
+              <option value="1">ถูก</option>
+              <option value="2">ผิด</option>
+              <option value="3">ไม่ทราบ</option>
+            </select>
+          </div>
+
+          <div class="col-md-2">
+            <label for="">ครั้งที่ {{9}}</label>
+            <select class="form-control" [(ngModel)]="new_data.statistic[8]" name="statistic" required>
+              <option value="1">ถูก</option>
+              <option value="2">ผิด</option>
+              <option value="3">ไม่ทราบ</option>
+            </select>
+          </div>
+
+          <div class="col-md-2">
+            <label for="">ครั้งที่ {{10}}</label>
+            <select class="form-control" [(ngModel)]="new_data.statistic[9]" name="statistic" required>
+              <option value="1">ถูก</option>
+              <option value="2">ผิด</option>
+              <option value="3">ไม่ทราบ</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 top">
+      <div class="form-group">
+        <!-- statics -->
+        <label for="statics"><strong>สถิติ (%)</strong>:</label>
+        <input type="number" id="statics" class="form-control" [(ngModel)]="new_data.statics" name="statics"
+          placeholder="สถิติ (%)" required>
+      </div>
+    </div>
+
+    <div class="col-md-6 top">
+      <div class="form-group">
+        <label for="name"><strong>ข้อความ:</strong></label>
+        <input type="text" id="name" class="form-control" placeholder="เช่น อิตาลี ซีเรียอา | อินเตอร์ มิลาน vs เจนัว"
+          [(ngModel)]="new_data.message" name="message" required>
+      </div>
+    </div>
+
+    <div class="col-md-6 top">
+      <div class="form-group">
+        <label for="name"><strong>ข้อความต่อ/รอง:</strong></label>
+        <input type="text" id="name" class="form-control" placeholder="เช่น ต่อ อินเตอร์ มิลาน"
+          [(ngModel)]="new_data.odds" name="message2" required>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="upload">
+        @if (new_data.image!= ''){
+        <img src="{{this.imgUrl}}{{new_data.image}}" alt="image" width="150" height="150">
+        }
+        <br>
+        <label for="upload">เลือกรูป:</label>
+        <input type="file" id="upload" (change)="selectFile($event)" />
+      </div>
+    </div>
+
+    <div class="row top">
+      <div class="col-12">
+        <button class="btn btn-primary" (click)="saveHomeMaster()" [disabled]="new_data.name == ''">บันทึก</button>
+      </div>
+    </div>
+    <!-- ปุ่มบันทึก -->
+
+  </div>
+</div>
+
+
+
+<div class="row top top">
+  <div class="col-md-12">
+    <table class="table table-striped table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>ชื่อ</th>
+          <th>รูป</th>
+          <th>สถิติ</th>
+          <th>สถิติ (%)</th>
+          <th>ข้อความ</th>
+          <th>ข้อความต่อ/รอง</th>
+          <th>แก้ไข/ลบ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of data; let i = index;">
+          <td>
+            @if (!edit[i]){ {{ item.name }} }
+            @else {<input type="text" class="form-control" [(ngModel)]="item.name" name="name" required>}
+          </td>
+          <td>
+            @if (!edit[i]){<img *ngIf="item.image!=''" src="{{this.imgUrl}}{{item.image}}" alt="image" width="100"
+              height="100"> <label *ngIf="item.image == ''">ไม่มี</label>}
+            @else {
+            <img *ngIf="item.image!=''" src="{{this.imgUrl}}{{item.image}}" alt="image" width="100"
+              height="100"><br><input type="file" (change)="selectFileEdit($event, i)" />
+            <button *ngIf="item.image!=''" class="btn btn-danger" (click)="deleteImage(i)">ลบรูป</button>
+            }
+          </td>
+          <td>
+            @if (!edit[i]) {
+            <label *ngFor="let item2 of item.statistic">
+              <img *ngIf="item2 == '1'" src="../../../assets/check-icon.svg" alt="">
+              <img *ngIf="item2 == '2'" src="../../../assets/cross-icon.svg" alt="">
+              <img *ngIf="item2 == '3'" src="../../../assets/minus-icon.svg" alt="">
+            </label>
+            }
+            @else {
+            <div class="row">
+                <div class="col-md-1">1.</div>
+                <div class="col-md-5 col-sm-12">
+                    <select [(ngModel)]="data[i].statistic[0]" name="statistic" required>
+                      <option value="1">ถูก</option>
+                      <option value="2">ผิด</option>
+                      <option value="3">ไม่ทราบ</option>
+                    </select>
+                  </div>
+                  
+                  <div class="col-md-1">2.</div>
+                  <div class="col-md-5 col-sm-12">
+                    <select [(ngModel)]="data[i].statistic[1]" name="statistic" required>
+                      <option value="1">ถูก</option>
+                      <option value="2">ผิด</option>
+                      <option value="3">ไม่ทราบ</option>
+                    </select>
+                  </div>
+
+                  <div class="col-md-1">3.</div>
+                  <div class="col-md-5 col-sm-12">
+                    <select [(ngModel)]="data[i].statistic[2]" name="statistic" required>
+                      <option value="1">ถูก</option>
+                      <option value="2">ผิด</option>
+                      <option value="3">ไม่ทราบ</option>
+                    </select>
+                  </div>
+
+                  <div class="col-md-1">4.</div>
+                  <div class="col-md-5 col-sm-12">
+                    <select [(ngModel)]="data[i].statistic[3]" name="statistic" required>
+                      <option value="1">ถูก</option>
+                      <option value="2">ผิด</option>
+                      <option value="3">ไม่ทราบ</option>
+                    </select>
+                  </div>
+
+                  <div class="col-md-1">5.</div>
+                  <div class="col-md-5 col-sm-12">
+                    <select [(ngModel)]="data[i].statistic[4]" name="statistic" required>
+                      <option value="1">ถูก</option>
+                      <option value="2">ผิด</option>
+                      <option value="3">ไม่ทราบ</option>
+                    </select>
+                  </div>
+                  
+                  <div class="col-md-1">6.</div>
+                  <div class="col-md-5 col-sm-12">
+                    <select [(ngModel)]="data[i].statistic[5]" name="statistic" required>
+                      <option value="1">ถูก</option>
+                      <option value="2">ผิด</option>
+                      <option value="3">ไม่ทราบ</option>
+                    </select>
+                  </div>
+
+                  <div class="col-md-1">7.</div>
+                  <div class="col-md-5 col-sm-12">
+                    <select [(ngModel)]="data[i].statistic[6]" name="statistic" required>
+                      <option value="1">ถูก</option>
+                      <option value="2">ผิด</option>
+                      <option value="3">ไม่ทราบ</option>
+                    </select>
+                  </div>
+
+                  <div class="col-md-1">8.</div>
+                  <div class="col-md-5 col-sm-12">
+                    <select [(ngModel)]="data[i].statistic[7]" name="statistic" required>
+                      <option value="1">ถูก</option>
+                      <option value="2">ผิด</option>
+                      <option value="3">ไม่ทราบ</option>
+                    </select>
+                  </div>
+
+                  <div class="col-md-1">9.</div>
+                  <div class="col-md-5 col-sm-12">
+                    <select [(ngModel)]="data[i].statistic[8]" name="statistic" required>
+                      <option value="1">ถูก</option>
+                      <option value="2">ผิด</option>
+                      <option value="3">ไม่ทราบ</option>
+                    </select>
+                  </div>
+
+                  <div class="col-md-1">10.</div>
+                  <div class="col-md-5 col-sm-12">
+                    <select [(ngModel)]="data[i].statistic[9]" name="statistic" required>
+                      <option value="1">ถูก</option>
+                      <option value="2">ผิด</option>
+                      <option value="3">ไม่ทราบ</option>
+                    </select>
+                  </div>
+                  
+            </div>
+
+            }
+          </td>
+          <td>
+            @if (!edit[i]){ {{ item.statics }}}
+            @else {<input type="number" class="form-control" [(ngModel)]="item.statics" name="statics" required>}
+        </td>
+          <td>
+            @if (!edit[i]) { {{ item.message }} }
+            @else {<input type="text" class="form-control" [(ngModel)]="item.message" name="message" required>}
+          </td>
+          <td>
+            @if (!edit[i]){ {{ item.odds }} }
+            @else {<input type="text" class="form-control" [(ngModel)]="item.odds" name="odds" required>}
+          </td>
+          <td>
+            @if (!edit[i]) {
+            <button class="btn btn-warning" (click)="updateHomeMasterClick(i)">แก้ไข</button>
+            <button class="btn btn-danger" (click)="deleteHomeMaster(item.id)">ลบ</button>
+            }
+            @else {
+            <button class="btn btn-success" (click)="updateHomeMaster(item.id, item)">บันทึก</button>
+            <button class="btn btn-danger" (click)="cancelEdit(i)">ยกเลิก</button>
+            }
+          </td>
+          <!-- @if (edit[i]) {
+            <td><input type="text" class="form-control" [(ngModel)]="item.name" name="name" required></td>
+            <td><input type="file" (change)="selectFile($event)" /></td>
+            <td>
+              <label *ngFor="let item2 of item.statistic">
+                <select class="form-control" [(ngModel)]="item2" name="statistic" required>
+                  <option value="1">ถูก</option>
+                  <option value="2">ผิด</option>
+                  <option value="3">ไม่ทราบ</option>
+                </select>
+              </label>
+            </td>
+            <td><input type="number" class="form-control" [(ngModel)]="item.statics" name="statics" required></td>
+            <td><input type="text" class="form-control" [(ngModel)]="item.message" name="message" required></td>
+            <td><input type="text" class="form-control" [(ngModel)]="item.odds" name="odds" required></td>
+            <td>
+              <button class="btn btn-success" (click)="updateHomeMaster(item.id, item)">บันทึก</button>
+              <button class="btn btn-danger" (click)="cancelEdit(i)">ยกเลิก</button>
+            </td>
+          } -->
+
+
+        </tr>
+    </table>
+  </div>
+</div>

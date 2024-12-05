@@ -1,0 +1,181 @@
+@if (message != '') {
+<div class="alert alert-{{status}}">
+  {{message}}
+</div>
+
+}
+
+<div class="box" style="margin-bottom: 2rem;">
+  <div class="form-inline">
+    <button class="btn btn-warning btn-sm col-md-6 top mr-1" (click)="addMatch()">เพิ่มคู่แข่งขัน</button>
+    <button class="btn btn-success btn-sm col-md-6 top" (click)="submit()">บันทึก</button>
+  </div> 
+
+
+  <div class="row" *ngFor="let item of match; let i = index;">
+    <div class="box-{{i%2}}">
+      <div class="col-12">
+        <h3>คู่ที่ {{i+1}} <button class="btn btn-danger btn-sm" (click)="deleteMatch(i)">ลบคู่แข่งขัน</button></h3>
+        <!-- สถานะ กำลังแข่ง ยังไม่แข่ง แข่งจบแล้ว -->
+        <div class="row">
+          <div class="form-group col-md-6">
+          <label for="status">สถานะ</label>
+          <select class="form-control" id="status" [(ngModel)]="item.status" placeholder="กรุณาเลือกสถานะ">
+            <option value="0">ยังไม่แข่ง</option>
+            <option value="1">แข่งจบแล้ว</option>
+            <option value="2">กำลังแข่ง</option>
+          </select>
+        </div>
+
+        <div class="form-group col-md-6">
+          <label for="league">เลือกลีก</label>
+          <select class="form-control" id="league" [(ngModel)]="item.league" placeholder="กรุณาเลือกลีก"
+            (ngModelChange)="getTeam(i, item.league)">
+            <option value="">กรุณาเลือกลีก</option>
+            <option *ngFor="let league of leagueList[i]" [value]="league.id">{{league.name}}</option>
+          </select>
+        </div>
+        </div>
+        
+
+        <div class="row top">
+          <!-- เลือกทีมเหย้า -->
+          <div class="form-group col-md-6">
+            <label for="home">เลือกทีมเหย้า</label><br>
+            <img src="{{imgUrl}}{{item.home_image}}" alt="" srcset="" width="75px" height="75px">
+            <select class="form-control" id="home" [(ngModel)]="item.home" placeholder="กรุณาเลือกทีมเหย้า" (ngModelChange)="(selectedHome(i, item.home))">
+              <option value="">กรุณาเลือกทีมเหย้า</option>
+              <option *ngFor="let team of teamList[i]" [value]="team.name">{{team.name}}</option>
+            </select>
+          </div>
+
+          <!-- เลือกทีมเยือน -->
+          <div class="form-group col-md-6">
+            <label for="away">เลือกทีมเยือน</label><br>
+            <img src="{{imgUrl}}{{item.away_image}}" alt="" srcset="" width="75px" height="75px">
+            <select class="form-control" id="away" [(ngModel)]="item.away" placeholder="กรุณาเลือกทีมเยือน" (ngModelChange)="selectedAway(i, item.away)">
+              <option value="">กรุณาเลือกทีมเยือน</option>
+              <option *ngFor="let team of teamList[i]" [value]="team.name">{{team.name}}</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- วันที่ เวลา -->
+        <div class="row top">
+          <div class="form-group col-md-6">
+            <label for="date">วันที่:</label>
+            <input type="date" class="form-control" id="date" [(ngModel)]="item.date" placeholder="กรุณาเลือกวันที่">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="time">เวลา:</label>
+            <input type="time" class="form-control" id="time" [(ngModel)]="item.time" placeholder="กรุณาเลือกเวลา">
+          </div>
+        </div>
+
+        <!-- ราคาต่อรอง -->
+        <div class="row top">
+          <div class="form-group col-md-6">
+            <label for="odds">ราคาต่อรอง</label>
+            <input type="text" class="form-control" id="odds" [(ngModel)]="item.odds" placeholder="กรุณากรอกราคาต่อรอง เช่น 1.5-2">
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="odds">ต่อทีมไหน</label>
+            <!-- เลือกทีมเหย้า หรือทีมเยือน -->
+            <select class="form-control" id="color" [(ngModel)]="item.hilight" placeholder="กรุณาเลือกทีมต่อ">
+              <option value="">กรุณาเลือกทีมต่อ</option>
+              <option value="home">ต่อทีมเหย้า</option>
+              <option value="away">ต่อทีมเยือน</option>
+            </select>
+          </div>
+
+        <!-- ผล -->
+        <div class="row top">
+          <div class="form-group col-md-6">
+            <label for="home_score">ผลทีมเหย้า:</label>
+            <input type="number" class="form-control" id="home_score" [(ngModel)]="item.home_score"
+              placeholder="กรุณากรอกผลทีมเหย้า">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="away_score">ผลทีมเยือน:</label>
+            <input type="number" class="form-control" id="away_score" [(ngModel)]="item.away_score"
+              placeholder="กรุณากรอกผลทีมเยือน">
+          </div>
+        </div>
+      </div>
+      <!-- ปุ่มลบ -->
+      <div class="row top">
+        <div class="col-md-6"><button class="btn btn-success btn-sm" (click)="addMaster(i)">เพิ่มเซียนบอล</button></div>
+      </div>
+
+      <div class="row top">
+        <div class="box-2" *ngFor="let master of item.master; let midx=index;">
+          <!-- เลือกเซ๊ยนบอล -->
+          <div class="row">
+            <h4>เซียนบอลคนที่ {{midx+1}}</h4>
+            <div class="form-group col-md-6">
+              <label for="master">เลือกเซียนบอล</label>
+              <select class="form-control" id="master" [(ngModel)]="master.id" placeholder="กรุณาเลือกเซียนบอล"
+                (ngModelChange)="selectedMaster(i, midx, master.id)">
+                <option value="">กรุณาเลือกเซียนบอล</option>
+                <option *ngFor="let master of masterList" [value]="master.id">{{master.name}}</option>
+              </select>
+            </div>
+
+            <div class="col-md-6">
+              <img *ngIf="master.image != ''" src="{{this.imgUrl}}{{master.image}}" alt="image" width="100"
+                height="100">
+            </div>
+
+          </div>
+
+          <!-- บทวิเคราะห์ -->
+          <div class="row top">
+            <div class="form-group col-md-6">
+              <label for="analysis">วิเคราะห์ผล</label>
+              <input class="form-control" id="analysis" [(ngModel)]="master.analysis"
+                placeholder="กรุณากรอกบทวิเคราะห์ เช่น ต่อ แมนยู">
+            </div>
+
+            <!-- Radio เลือกผลลัพธ์ แพ้ ชนะ เสมอ เอาไปใส่ item.result-->
+            <div class="form-group col-md-6">
+              <label for="result">ทายว่าทีมเหย้าจะ(ทีมด้านซ้าย)</label>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="result{{i}}{{midx}}" id="result1{{i}}{{midx}}" value="1"
+                  [(ngModel)]="master.result">
+                <label class="form-check" for="result1{{i}}{{midx}}">ชนะ</label>
+              </div>
+
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="result{{i}}{{midx}}" id="result2{{i}}{{midx}}" value="2"
+                  [(ngModel)]="master.result">
+                <label class="form-check" for="result2{{i}}{{midx}}">เสมอ</label>
+              </div>
+
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="result{{i}}{{midx}}" id="result3{{i}}{{midx}}" value="3"
+                  [(ngModel)]="master.result">
+                <label class="form-check" for="result3{{i}}{{midx}}">แพ้</label>
+              </div>
+
+            </div>
+            <div class="form-group col-md-6">
+              <label for="link">ลิงค์วิเคราะห์</label>
+              <input type="text" class="form-control" id="link" [(ngModel)]="master.link"
+                placeholder="กรุณากรอกลิงค์วิเคราะห์ http://.....">
+            </div>
+            <div class="col-md-12 top"><button class="btn btn-danger btn-sm"
+                (click)="deleteMaster(i, midx)">ลบเซียนบอล</button>
+            </div>
+
+          </div>
+
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+  <button class="btn btn-warning btn-lg col-12 top" (click)="addMatch()">เพิ่มคู่แข่งขัน</button>
+    <button class="btn btn-success btn-lg col-12 top" (click)="submit()">บันทึก</button>
+  </div>

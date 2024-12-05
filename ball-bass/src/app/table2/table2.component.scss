@@ -1,0 +1,274 @@
+@media only screen and (max-width: 1000px) {
+  table {
+    width: 100%;
+    background-color: rgb(50, 50, 50);
+    color: white;
+    border-collapse: collapse;
+    white-space: nowrap;
+  }
+  
+  td,
+  th {
+    border: 1px solid #4f79c5;
+  }
+  
+  
+  .bg-team {
+    background-color: #0d1c3d;
+    font-size: 1vw;
+    padding: 5px;
+  }
+  
+  .bg-team-th {
+    background-color: #0d1c3d;
+    font-size: 1vw;
+    padding: 5px;
+    text-align: center;
+  }
+  
+  .td-colume {
+    background-image: url(../../assets/hot-bg.webp);
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  
+  
+  .text-master{
+    display: flex;
+    flex-grow: 1;
+  }
+  
+  
+  .master-name{
+    text-align: right;
+  }
+  
+  .master-main{
+    font-size: 1vw;
+    font-weight: 600;
+  }
+  
+  .master-sub {
+    font-size: 1vw;
+    font-weight: 600;
+    color: #869BB4;
+    margin-left: 1vw;
+  }
+  
+  .percents{
+    color: #FAF0B6;
+    font-size: 1vw;
+  }
+  
+  
+  .one {
+    margin-bottom: -20px;
+  }
+  
+  .two {
+    margin-top: 5px;
+  }
+  
+  .name-titles{
+    margin-left: 1vw;
+  }
+
+  .sean-img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .statistic {
+    font-size: 1vw;
+  }
+
+  .star-img {
+    width: 7px;
+    height: 7px;
+  }
+
+  .result-img {
+    width: 2.5vw;
+    height: 2.5vw;
+  }
+  
+  .card-dte{
+    background-color: #092053;
+  }
+  table .table-hover{
+    background-color: #f5f5f5;
+    cursor: pointer;
+  }
+  
+  
+  .table-hover tr:hover {
+    background-color: #092053;
+    cursor: pointer;
+  }
+  
+  .table-hover td:hover {
+    background-color: #092053;
+  }
+  
+  .result-container {
+    position: relative;
+  }
+  
+  .result-icon {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+  }
+
+@media only screen and (min-width: 1000px) {
+
+table {
+  width: 100%;
+  background-color: rgb(50, 50, 50);
+  color: white;
+  border-collapse: collapse;
+  white-space: nowrap;
+}
+
+td,
+th {
+  border: 1px solid #4f79c5;
+}
+
+
+.bg-team {
+  background-color: #0d1c3d;
+  font-size: 16px;
+  padding: 5px;
+}
+
+.bg-team-th {
+  background-color: #0d1c3d;
+  font-size: 16px;
+  padding: 5px;
+  text-align: center;
+}
+
+.td-colume {
+  background-image: url(../../assets/hot-bg.webp);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+
+.text-master{
+  display: flex;
+  flex-grow: 1;
+}
+
+
+.master-name{
+  text-align: right;
+}
+
+.master-main{
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.master-sub {
+  font-weight: 600;
+  color: #869BB4;
+  margin-left: 20px;
+}
+
+.percents{
+  color: #FAF0B6;
+  font-size: 15px;
+}
+
+.one {
+  margin-bottom: -20px;
+}
+
+.two {
+  margin-top: 5px;
+}
+
+.name-titles{
+  margin-left: 1.5rem;
+  font-size: 14px;
+}
+
+.name-away{
+  font-size: 14px;
+}
+
+
+.card-dte{
+  background-color: #092053;
+}
+table .table-hover{
+  background-color: #f5f5f5;
+  cursor: pointer;
+}
+
+
+.table-hover tr:hover {
+  background-color: #092053;
+  cursor: pointer;
+}
+
+.table-hover td:hover {
+  background-color: #092053;
+}
+
+.result-container {
+  position: relative;
+}
+
+.result-icon {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.sean-img {
+  width: 70px;
+  height: 70px;
+}
+
+.statistic {
+  font-size: 30px;
+}
+
+.star-img {
+  width: 20px;
+  height: 20px;
+  margin-top: -0.3rem;
+}
+
+.result-img {
+  width: 30px;
+  height: 30px;
+}
+}
+
+.head-message{
+  font-size: 2.5vw;
+  color: white;
+  text-align: center;
+  padding: 0px;
+  background-color: #232F56;
+  width: 100%;
+}
+
+.img-sean{
+  border-radius: 50%;
+  background-color: #232F56;
+  width: 5vw;
+  height: auto;
+}
+.line{
+  border-radius: 10%;
+  background-color: #232F56;
+  width: 17vw;
+  height: 3.5vw;
+  // margin-top: -3vh;
+}

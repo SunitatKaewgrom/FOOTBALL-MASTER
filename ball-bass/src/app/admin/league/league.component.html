@@ -1,0 +1,65 @@
+@if (message!= '') {
+  <div class="alert alert-{{status}}">
+    {{message}}
+  </div>
+}
+<div class="box">
+  <div class="row">
+    <h3>เพิ่มข้อมูลลีก</h3>
+  </div>
+
+      <div class="form-group">
+        <label for="name">ชื่อลีก:</label>
+        <input type="text" id="name" class="form-group col-6" [(ngModel)]="League.name" name="name" required>
+      </div>
+
+      <div class="upload">
+        @if (League.image!= ''){
+        <img src="{{this.imgUrl}}{{League.image}}" alt="image" width="100" height="100">
+        }
+        <br>
+        <label for="upload">เลือกรูปลีก:</label>
+        <input type="file" id="upload" (change)="selectFile($event)"/>
+      </div>
+
+      <!-- ปุ่มบันทึก -->
+      <button class="btn btn-primary col-3" (click)="saveLeague()" [disabled]="League.name == ''">บันทึก</button>
+</div>
+
+<!-- ตารางแสดงลีก ประกอบด้วย ID, ชื่อ, รูป, แก้ไข, ลบ -->
+<div class="box">
+  <div class="row">
+    <h3>ข้อมูลลีก</h3>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ลำดับ</th>
+        <th>ID</th>
+        <th>ชื่อ</th>
+        <th>รูป</th>
+        <th>แก้ไข</th>
+        <th>ลบ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ball of masterList; let i = index;">
+        <td>{{i+1}}</td>
+        <td>{{ball.id}}</td>
+        @if (!edit[i]){<td>{{ball.name}}</td>}
+        @else{<td><input type="text" [(ngModel)]="ball.name" name="name" required></td>}
+        @if (!edit[i]){<td><img *ngIf="ball.image!=''" src="{{this.imgUrl}}{{ball.image}}" alt="image" width="100" height="100"> <label *ngIf="ball.image == ''">ไม่มี</label></td>}
+        @else{<td><img *ngIf="ball.image!=''" src="{{this.imgUrl}}{{ball.image}}" alt="image" width="100" height="100"><br><input type="file" (change)="selectFileEdit($event, i)"/>
+        <!-- ลบรูป (set ball.image = '') -->
+        <button *ngIf="ball.image!=''" class="btn btn-danger" (click)="deleteImage(i)">ลบรูป</button>
+        </td>}
+        @if (!edit[i]) {<td><button class="btn btn-warning" (click)="updateLeagueClick(i)">แก้ไข</button></td>}
+        @else{<td><button class="btn btn-success" (click)="updateLeague(ball.id, ball)">บันทึก</button>
+          <button class="btn btn-danger" (click)="cancelEdit(i)">ยกเลิก</button></td>}
+        @if (!edit[i]) {<td><button class="btn btn-danger" (click)="deleteLeague(ball.id)">ลบ</button></td>}
+
+      </tr>
+    </tbody>
+  </table>
+</div>
+

@@ -1,0 +1,71 @@
+<div class="head-message">
+  <div class="row">
+      <div class="col-1 mt-1">
+        <img src="{{imgUrl}}{{image1}}" class="img-sean">
+      </div>
+      <div class="col-11" style="margin-left: -4vw;">
+      <div [innerText]="message"></div>
+    </div>
+  </div>
+</div>
+
+<table class="table-hover">
+  <tr>
+    <th class="td-colume"><img src="{{imgUrl}}{{image2}}" class="line"></th>
+    <th *ngFor="let dayMatch of data; let j = index;" class="bg-team-th">
+      <div class="card-dte">
+        {{convertDate(dayMatch.date)}}
+      </div>
+    </th>
+  </tr>
+  <tr *ngFor="let master of master; let i = index;">
+    <td class="td-colume">
+      <div class="text-master p-2 one">
+        <img src="{{imgUrl}}{{master.image}}" alt="" srcset="" class="sean-img">
+        <div class="master-name " style="margin-left: 10px;">
+          <label class="master-main">{{master.name.split(' ')[0]}}</label>
+          <p class="master-sub">{{master.name.split(' ')[1]}}</p>
+        </div>
+      </div>
+      <div class="justify-content-end d-flex align-items-center me-2  two">
+        <h5  class="statistic">สถิติ</h5>
+        <h3 class="percents">&nbsp;{{statistic[i].percent}}</h3>
+      </div>
+    </td>
+
+    <td *ngFor="let dayMatch of data; let j = index;" class="bg-team">
+      <div *ngFor="let masterMatch of dayMatch.master; let k = index;">
+        <div *ngIf="masterMatch.id == master.id">
+          @if (masterMatch.match.winner === 'home') {
+          <br>
+          <label class="name-titles">{{masterMatch.match.away.name}}</label>
+          <br>
+          <img src="../../assets/star.svg" alt="" srcset="" class="star-img">
+          <label>&nbsp;{{masterMatch.match.home.name}}</label>
+          }@else if (masterMatch.match.winner === 'away') {
+            <br>
+          <label class="name-titles">{{masterMatch.match.home.name}}</label><br>
+          <img src="../../assets/star.svg" alt="" srcset="" class="star-img">
+          <label class="name-away">&nbsp;{{masterMatch.match.away.name}}</label>
+          }@else {
+          <label>&nbsp;{{masterMatch.match.home.name}}</label>
+          <label class="name-away">&nbsp;{{masterMatch.match.away.name}}</label>
+          }
+          <!-- เครื่องหมายทายถูก ผิด -->
+          <br> <br>
+          <div>
+            @if (masterMatch.match.winner == masterMatch.match.win && j != 0){
+              <div class="justify-content-end d-flex">
+            <img src="../../assets/check-icon-2-2.svg" alt="" srcset="" class="result-img">
+          </div>
+            }@else if (masterMatch.match.winner != masterMatch.match.win && j != 0){
+              <div class="justify-content-end d-flex">
+            <img src="../../assets/cross-icon-2-2.svg" alt="" srcset="" class="result-img">
+          </div>
+            }
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+</table>

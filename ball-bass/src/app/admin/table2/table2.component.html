@@ -1,0 +1,112 @@
+<!-- Button add date -->
+
+<div class="box">
+  <div class="row box-0 top">
+    <h3>วันที่: {{convertDate()}}</h3>
+    <div class="col-md-3">
+      <input type="date" class="form-control" [(ngModel)]="date" placeholder="วันที่" (ngModelChange)="changeDate()">
+    </div>
+
+    <!-- ปุ่มเพิ่มเซียนบอล -->
+    <div class="col-md-6 top">
+      <button class="btn btn-success btn-sm" (click)="addMaster()">เพิ่มเซียนบอล</button>
+    </div>
+
+    <div *ngFor="let master of data.master; let i = index;" class="box-sub-{{i%2}}">
+      <div class="row">
+        <div class="col-md-6">
+          <h4>เซียนบอล: {{master.name}} <button class="btn btn-danger btn-sm" (click)="removeMaster(i)">ลบ</button></h4>
+          <div class="col-md-6">
+            <img *ngIf="master.image != ''" src="{{this.imgUrl}}{{master.image}}" alt="image" width="100" height="100">
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-6">
+                <label for="name">เลือกเซียนบอล</label>
+              <select class="form-select" id="name" [(ngModel)]="master.id" (ngModelChange)="changeBallMaster(i, master.id)">
+                <option value="">เลือกเซียนบอล</option>
+                <option *ngFor="let master of masterList" [value]="master.id">{{master.name}}</option>
+              </select>
+            </div>
+
+            <!-- <div class="col-md-6">
+              <label for="statics">สถิติ (%)</label>
+              <input type="number" class="form-control" id="statics" [(ngModel)]="master.statics" [value]="master.statics>100? 100: master.statics" max="100" min="0" placeholder="สถิติ (%)">
+            </div> -->
+
+            <!-- link -->
+            <div class="col-md-12">
+              <label for="link">ลิ้งค์วิเคราะห์</label>
+              <input type="text" class="form-control" id="link" [(ngModel)]="master.link" placeholder="ลิ้งค์วิเคราะห์">
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <h4>คู่แข่งขันที่วิเคราะห์</h4>
+          <div class="row">
+            <!-- เลือกลีก -->
+            <div class="col-md-6">
+              <label for="league"><strong>เลือกลีก</strong></label>
+              <select class="form-select" id="league" [(ngModel)]="master.match.league_id"
+                (ngModelChange)="changeLeague(i, master.match.league_id)">
+                <option value="">เลือกลีก</option>
+                <option *ngFor="let league of leagueList" [value]="league.id">{{league.name}}</option>
+              </select>
+
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label for="home"><strong>ทีมเหย้า</strong></label>
+                <select class="form-select" id="home" [(ngModel)]="master.match.home.id"
+                  (ngModelChange)="changeHome(i, master.match.home.id)">
+                  <option value="">เลือกทีมเหย้า</option>
+                  <option *ngFor="let team of teamList[i]" [value]="team.id">{{team.name}}</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label for="away"><strong>ทีมเยือน</strong></label>
+                <select class="form-select" id="away" [(ngModel)]="master.match.away.id"
+                  (ngModelChange)="changeAway(i, master.match.away.id)">
+                  <option value="">เลือกทีมเยือน</option>
+                  <option *ngFor="let team of teamList[i]" [value]="team.id">{{team.name}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row top">
+              <div class="col-md-6">
+                <input type="radio" id="home-{{i}}" name="winner-{{i}}" value="home" [(ngModel)]="master.match.winner">
+                <label for="home-{{i}}">&nbsp;วิเคราะห์ว่าทีมเหย้าชนะ </label>
+              </div>
+              <div class="col-md-6">
+                <input type="radio" id="away-{{i}}" name="winner-{{i}}" value="away" [(ngModel)]="master.match.winner">
+                <label for="away-{{i}}">&nbsp;วิเคราะห์ว่าทีมเยือนชนะ</label>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <label for="result"><strong>ผลการแข่งขัน</strong></label>
+                <select class="form-select" id="result" [(ngModel)]="master.match.win">
+                  <option value="">ยังไม่มีผลการแข่งขัน</option>
+                  <option value="home">ทีมเหย้าชนะ</option>
+                  <option value="away">ทีมเยือนชนะ</option>
+                  <option value="draw">เสมอ</option>
+                </select>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ปุ่มบันทึก -->
+  <div class="row top">
+    <button class="btn btn-primary" (click)="save()">บันทึก</button>
+  </div>
+</div>

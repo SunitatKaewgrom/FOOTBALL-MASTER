@@ -1,0 +1,25 @@
+<div class="box center-half-flex container">
+  <h1>LOGIN</h1>
+
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <div class="row">
+    <div class="col-md-12">
+      <label for="username">Username</label>
+      <input type="text" id="username" class="form-control" formControlName="username">
+    </div>
+
+    <div class="col-md-12 top">
+      <label for="password">Password</label>
+      <input type="password" id="password" class="form-control" formControlName="password">
+    </div>
+  </div>
+
+  <div class="row top">
+    <div class="col-12">
+      <button type="submit" class="btn btn-success" [disabled]="!loginForm.valid">Login</button>
+    </div>
+  </div>
+
+</form>
+</div>
+

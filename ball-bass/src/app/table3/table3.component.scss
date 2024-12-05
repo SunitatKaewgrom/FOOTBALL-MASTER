@@ -1,0 +1,163 @@
+.bfg-1 {
+  background-color: #0d1c3d
+}
+
+@media only screen and (max-width: 1000px) {
+  div {
+    font-size: 1.5vw;
+  }
+
+  .statistic {
+    font-size: 1.5vw;
+  }
+
+  .ich-14 {
+    height: 1.2vw;
+    width: auto
+  }
+
+  .message {
+    font-size: 1vw;
+  }
+
+  .avatar,.avatar-40 {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover
+  }
+  
+  .hot-border {
+    border-color: #4f79c5!important
+  }
+  
+  .hot-bg-1 {
+    background-color: #0d1c3d
+  }
+  
+  .hot-bg-2 {
+    background-color: rgba(255,255,255,.1)
+  }
+  
+  .text-muted {
+    color: #98a3ac!important
+  }
+  
+  .avatar {
+    width: 2vw;
+    height: 2vw;
+    min-width: 2vw;
+    min-height: 2vw;
+    border: 2px solid;
+    border-radius: 50%
+  }
+  
+  .avatar-40 {
+    width: 4vw;
+    height: 4vw;
+    min-width: 4vw;
+    min-height: 4vw
+  }
+  
+  .bd-round-tl,.bd-round-tl-tr {
+    border-top-left-radius: 12px
+  }
+  
+  .bd-round-tl-tr,.bd-round-tr {
+    border-top-right-radius: 12px
+  }
+  
+  .bd-round-bl,.bd-round-bl-br {
+    border-bottom-left-radius: 12px
+  }
+  
+  .bd-round-bl-br,.bd-round-br {
+    border-bottom-right-radius: 12px
+  }
+  }
+  
+  
+
+@media only screen and (min-width: 1001px) {
+
+.ich-14 {
+  height: 16px;
+  width: auto
+}
+.avatar,.avatar-40 {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover
+}
+
+.hot-border {
+  border-color: #4f79c5!important
+}
+
+.hot-bg-1 {
+  background-color: #0d1c3d
+}
+
+.hot-bg-2 {
+  background-color: rgba(255,255,255,.1)
+}
+
+.text-muted {
+  color: #98a3ac!important
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  min-height: 32px;
+  border: 2px solid;
+  border-radius: 50%
+}
+
+.avatar-40 {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px
+}
+
+.bd-round-tl,.bd-round-tl-tr {
+  border-top-left-radius: 12px
+}
+
+.bd-round-tl-tr,.bd-round-tr {
+  border-top-right-radius: 12px
+}
+
+.bd-round-bl,.bd-round-bl-br {
+  border-bottom-left-radius: 12px
+}
+
+.bd-round-bl-br,.bd-round-br {
+  border-bottom-right-radius: 12px
+}
+}
+
+
+.head-message{
+  font-size: 2vw;
+  color: white;
+  text-align: center;
+  padding: 0px;
+  background-color: #232F56;
+  width: 100%;
+}
+
+.img-sean{
+  border-radius: 50%;
+  background-color: #232F56;
+  width: 5vw;
+  height: auto;
+}
+.line{
+  border-radius: 10%;
+  background-color: #232F56;
+  width: 15vw;
+  height: 4.5vw;
+  // margin-top: -3vh;
+}

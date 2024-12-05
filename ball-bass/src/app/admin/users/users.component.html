@@ -1,0 +1,63 @@
+@if (message!= '') {
+<div class="alert alert-{{status}}">
+  {{message}}
+</div>
+}
+<div class="box">
+  <div class="row">
+    <h3>เพิ่มข้อมูล Admin</h3>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="name">Username:</label>
+        <input type="text" id="name" class="form-control" [(ngModel)]="Admin.username" name="name" required>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <!-- password -->
+      <div class="form-group">
+        <label for="password">รหัสผ่าน:</label>
+        <input type="password" id="password" class="form-control" [(ngModel)]="Admin.password" name="password" required>
+      </div>
+    </div>
+
+    <!-- ปุ่มบันทึก -->
+    <button class="btn btn-primary col-3 top" (click)="saveAdmin()"
+      [disabled]="Admin.username == '' || Admin.password == ''">บันทึก</button>
+  </div>
+</div>
+
+<!-- ตารางแสดง Admin ประกอบด้วย ID, ชื่อ, รูป, แก้ไข, ลบ -->
+<div class="box">
+  <div class="row">
+    <h3>ข้อมูล Admin</h3>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ลำดับ</th>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Password</th>
+        <th>แก้ไข</th>
+        <th>ลบ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ball of masterList; let i = index;">
+        <td>{{i+1}}</td>
+        <td>{{ball.id}}</td>
+        @if (!edit[i]){<td>{{ball.username}}</td>}
+        @else{<td><input type="text" [(ngModel)]="ball.username" name="username" required></td>}
+        @if (!edit[i]){<td>{{ball.password}}</td>}
+        @else{<td><input type="text" [(ngModel)]="ball.password" name="password" required></td>}
+        @if (!edit[i]) {<td><button class="btn btn-warning" (click)="updateAdminClick(i)">แก้ไข</button></td>}
+        @else{<td><button class="btn btn-success" (click)="updateAdmin(ball.id, ball)">บันทึก</button>
+                  <button class="btn btn-danger" (click)="cancelEdit(i)">ยกเลิก</button></td>}
+        @if (!edit[i]) {<td><button *ngIf="masterList.length > 1" class="btn btn-danger" (click)="deleteAdmin(ball.id)">ลบ</button></td>}
+      </tr>
+    </tbody>
+  </table>
+</div>

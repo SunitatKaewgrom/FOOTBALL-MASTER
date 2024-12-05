@@ -1,0 +1,131 @@
+<div class="head-message">
+  <div class="row">
+      <div class="col-1 mt-1">
+        <img src="{{imgUrl}}{{image1}}" class="img-sean">
+      </div>
+      <div class="col-9" style="margin-left: -4vw;">
+      <div [innerText]="message"></div>
+    </div>
+    <img src="{{imgUrl}}{{image2}}" class="line">
+  </div>
+</div>
+
+<table class="center">
+  <tr *ngFor="let item of data; let i = index;" class="bg-team">
+    <td class="hot-bg">
+      <label class="name-league mt-2">{{item.league_name}} </label>
+      <div style="margin-top: -0.5rem;">
+        <label class="date-kick">
+          {{convertDate(item.date, item.time)}}
+        </label>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-4">
+            <div class="justify-content-center d-flex text-center">
+              <img *ngIf="item.home_image != ''" src="{{imgUrl}}{{item.home_image}}" alt="home img" class="team-img">
+            </div>
+            @if (item.hilight === 'home') {
+            <label class="text-center text-home"
+              style="text-decoration: underline; display: block; color: red;">{{item.home}}</label>
+            }
+            @else {
+            <label class="text-center text-home" style="display: block;">{{item.home}}</label>
+            }
+          </div>
+          <div class="col-4">
+            <h5 class="text-scores">
+              @if (item.status === '0'){
+              <label class="bg-white  rounded-pill text-dark col-lg-12 col-sm-12 oods"
+                style="margin-top: 0.5rem;">{{item.odds}}</label>
+              }
+              @else {
+              <label style="margin-top: 0.5rem;">{{item.home_score}} - {{item.away_score}}</label>
+              }
+            </h5>
+          </div>
+          <div class="col-4">
+            <div class="justify-content-center d-flex text-center">
+              <img *ngIf="item.away_image != ''" src="{{imgUrl}}{{item.away_image}}" alt="away img" class="team-img">
+            </div>
+            @if (item.hilight === 'away') {
+            <label class="text-center text-away"
+              style="text-decoration: underline; display: block; color: red;">{{item.away}}</label>
+            }
+            @else {
+            <label class="text-center text-away" style="display: block;">{{item.away}}</label>
+            }
+          </div>
+        </div>
+      </div>
+    </td>
+
+
+    @if (i === 0) {
+    <!-- เซียนบอล -->
+    <td *ngFor="let master of item.master" class="td-colume">
+      <div class="header-title">
+        <img *ngIf="master.image != ''" src="{{imgUrl}}{{master.image}}" alt="home img" width="25px" height="25px"
+          class="img-sean">
+        <strong>{{master.name.split(' ')[0]}}</strong>
+      </div>
+
+      @if (item.status === '0') {
+      <!-- วิเคราะห์ -->
+      <p class="title-ball mt-2">{{master.analysis}}</p>
+      <!-- กดเพื่อไปลิงค์วิเคราะห์ -->
+      <a href="{{master.link}}" target="_blank" class="btn btn-sm btn-primarys mb-2 link-btn">
+        <img class="me-1" src="../../assets/sound-animation-yellow.svg" alt="ดูวิเคราะห์ {{master.name}}"
+          width="10px">ดูวิเคราะห์</a>
+      }
+      @else {
+      <!-- วิเคราะห์ -->
+      <p class="text-names">{{master.analysis}}</p>
+      <!-- ผลการแข่งขัน -->
+      <p class="title-score">
+        <img *ngIf="result(item.home_score, item.away_score, master.result) === 'WIN'" src="../../assets/check-icon.svg"
+          alt="" srcset="" class="me-2 res-img">
+        <img *ngIf="result(item.home_score, item.away_score, master.result) === 'LOSE'"
+          src="../../assets/cross-icon.svg" alt="" srcset="" class="me-2 res-img">
+        <img *ngIf="result(item.home_score, item.away_score, master.result) === 'DRAW'"
+          src="../../assets/minus-icon.svg" alt="" srcset="" class="me-2 res-img">
+        <span class="score"
+          [style.color]="result(item.home_score, item.away_score, master.result) === 'WIN' ? '#00FF0A' : (result(item.home_score, item.away_score, master.result) === 'DRAW' ? '#39ACFF' : '#f46174')">
+          {{result(item.home_score, item.away_score, master.result)}}
+        </span>
+      </p>
+      }
+
+    </td>
+    }
+    @else {
+    <!-- เซียนบอล -->
+    <td *ngFor="let master of item.master" class="bg-winloss">
+      @if (item.status === '0') {
+      <!-- วิเคราะห์ -->
+      <p class="title-ball mt-2">{{master.analysis}}</p>
+      <!-- กดเพื่อไปลิงค์วิเคราะห์ -->
+      <a href="{{master.link}}" target="_blank" class="btn btn-sm btn-primarys mb-2 link-btn">
+        <img class="me-1" src="../../assets/sound-animation-yellow.svg"
+          alt="ดูวิเคราะห์ {{master.name}}">ดูวิเคราะห์</a>
+      }
+      @else {
+      <!-- วิเคราะห์ -->
+      <p class="text-names">{{master.analysis}}</p>
+      <!-- ผลการแข่งขัน -->
+      <p class="title-score">
+        <img *ngIf="result(item.home_score, item.away_score, master.result) === 'WIN'" src="../../assets/check-icon.svg"
+          alt="" srcset="" class="me-2 res-img">
+        <img *ngIf="result(item.home_score, item.away_score, master.result) === 'LOSE'"
+          src="../../assets/cross-icon.svg" alt="" srcset="" class="me-2 res-img">
+        <img *ngIf="result(item.home_score, item.away_score, master.result) === 'DRAW'"
+          src="../../assets/minus-icon.svg" alt="" srcset="" class="me-2 res-img">
+        <span class="score"
+          [style.color]="result(item.home_score, item.away_score, master.result) === 'WIN' ? '#49ec83' : (result(item.home_score, item.away_score, master.result) === 'DRAW' ? '#39ACFF' : '#f46174')">
+          {{result(item.home_score, item.away_score, master.result)}} </span>
+      </p>
+      }
+    </td>
+    }
+  </tr>
+</table>

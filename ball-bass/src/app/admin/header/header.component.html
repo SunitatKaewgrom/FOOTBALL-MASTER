@@ -1,0 +1,41 @@
+<section class="mbc-mainmenu-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="mainmenu">
+          <nav>
+            <ul id="mbc_navigation">
+              <li>
+                <a [routerLink]="['/admin/message']" routerLinkActive="active">ข้อความหัวตาราง</a>
+              </li>
+              <li>
+                <a [routerLink]="['/admin/table1']" routerLinkActive="active">ตารางทีเด็ดบอลวันนี้</a>
+              </li>
+              <li>
+                <a [routerLink]="['/admin/table2']" routerLinkActive="active">ตารางบอลเด็ดวันนี้</a>
+              </li>
+              <li>
+                <a [routerLink]="['/admin/table3']" routerLinkActive="active">เซียนบอลทางบ้าน</a>
+              </li>
+              <li>
+                <a [routerLink]="['/admin/master']" routerLinkActive="active">จัดการเซียนบอล</a>
+              </li>
+              <li>
+                <a [routerLink]="['/admin/users']" routerLinkActive="active">จัดการแอดมิน</a>
+              </li>
+              <li>
+                <a [routerLink]="['/admin/league']" routerLinkActive="active">จัดการลีก</a>
+              </li>
+              <li>
+                <a [routerLink]="['/admin/teams']" routerLinkActive="active">จัดการทีม</a>
+              </li>
+              <li>
+                <button (click)="logout()" class="btn btn-info">ออกจากระบบ</button>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

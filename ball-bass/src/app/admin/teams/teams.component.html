@@ -1,0 +1,87 @@
+@if (message!= '') {
+  <div class="alert alert-{{status}}">
+    {{message}}
+  </div>
+}
+<div class="box">
+  <div class="row">
+    <h3>เพิ่มข้อมูลทีม</h3>
+  </div>
+
+      <div class="form-group">
+        <label for="name">ชื่อทีม:</label>
+        <input type="text" id="name" class="form-group col-6" [(ngModel)]="Team.name" name="name" required>
+      </div>
+
+      <!-- เลือกลีก -->
+      <div class="form-group top">
+        <label for="league_id">เลือกลีก:</label>
+        <select id="league_id" class="form-group" [(ngModel)]="Team.league_id" name="league_id" required>
+          <option *ngFor="let league of leagueList" [value]="league.id">{{league.name}}</option>
+        </select>
+      </div>
+
+      <div class="upload">
+        @if (Team.image!= ''){
+        <img src="{{this.imgUrl}}{{Team.image}}" alt="image" width="100" height="100">
+        }
+        <br>
+        <label for="upload">เลือกรูปทีม:</label>
+        <input type="file" id="upload" (change)="selectFile($event)"/>
+      </div>
+
+      <!-- ปุ่มบันทึก -->
+      <button class="btn btn-primary col-3" (click)="saveTeam()" [disabled]="Team.name == '' || Team.league_id == ''">บันทึก</button>
+</div>
+
+<!-- ตารางแสดงทีม ประกอบด้วย ID, ชื่อ, รูป, แก้ไข, ลบ -->
+<div class="box">
+  <div class="row">
+    <h3>ข้อมูลทีม</h3>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <input type="text" class="form-control" placeholder="ค้นหา" [(ngModel)]="keyword" name="search" (ngModelChange)="search()">
+    </div>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ลำดับ</th>
+        <th>ID</th>
+        <th>ชื่อ</th>
+        <th>ลีก</th>
+        <th>รูป</th>
+        <th>แก้ไข</th>
+        <th>ลบ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ball of teamList; let i = index;">
+        <td>{{i+1}}</td>
+        <td>{{ball.id}}</td>
+        @if (!edit[i]){<td>{{ball.name}}</td>}
+        @else{<td><input type="text" [(ngModel)]="ball.name" name="name" required></td>}
+
+        @if (!edit[i]){<td>{{ball.league_name}}</td>}
+        @else{<td>
+          <select [(ngModel)]="ball.league_id" name="league_id" required>
+            <option *ngFor="let league of leagueList" [value]="league.id">{{league.name}}</option>
+          </select>
+        </td>}
+
+        @if (!edit[i]){<td><img *ngIf="ball.image!=''" src="{{this.imgUrl}}{{ball.image}}" alt="image" width="100" height="100"> <label *ngIf="ball.image == ''">ไม่มี</label></td>}
+        @else{<td><img *ngIf="ball.image!=''" src="{{this.imgUrl}}{{ball.image}}" alt="image" width="100" height="100"><br><input type="file" (change)="selectFileEdit($event, i)"/>
+        <!-- ลบรูป (set ball.image = '') -->
+        <button *ngIf="ball.image!=''" class="btn btn-danger" (click)="deleteImage(i)">ลบรูป</button>
+        </td>}
+        @if (!edit[i]) {<td><button class="btn btn-warning" (click)="updateTeamClick(i)">แก้ไข</button></td>}
+        @else{<td><button class="btn btn-success" (click)="updateTeam(ball.id, ball)">บันทึก</button>
+          <button class="btn btn-danger" (click)="cancelEdit(i)">ยกเลิก</button></td>}
+        @if (!edit[i]) {<td><button class="btn btn-danger" (click)="deleteTeam(ball.id)">ลบ</button></td>}
+
+      </tr>
+    </tbody>
+  </table>
+</div>
+
