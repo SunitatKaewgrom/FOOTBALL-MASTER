@@ -1,41 +1,85 @@
-<section class="mbc-mainmenu-area">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="mainmenu">
-          <nav>
-            <ul id="mbc_navigation">
-              <li>
-                <a [routerLink]="['/admin/message']" routerLinkActive="active">ข้อความหัวตาราง</a>
-              </li>
-              <li>
-                <a [routerLink]="['/admin/table1']" routerLinkActive="active">ตารางทีเด็ดบอลวันนี้</a>
-              </li>
-              <li>
-                <a [routerLink]="['/admin/table2']" routerLinkActive="active">ตารางบอลเด็ดวันนี้</a>
-              </li>
-              <li>
-                <a [routerLink]="['/admin/table3']" routerLinkActive="active">เซียนบอลทางบ้าน</a>
-              </li>
-              <li>
-                <a [routerLink]="['/admin/master']" routerLinkActive="active">จัดการเซียนบอล</a>
-              </li>
-              <li>
-                <a [routerLink]="['/admin/users']" routerLinkActive="active">จัดการแอดมิน</a>
-              </li>
-              <li>
-                <a [routerLink]="['/admin/league']" routerLinkActive="active">จัดการลีก</a>
-              </li>
-              <li>
-                <a [routerLink]="['/admin/teams']" routerLinkActive="active">จัดการทีม</a>
-              </li>
-              <li>
-                <button (click)="logout()" class="btn btn-info">ออกจากระบบ</button>
-              </li>
-            </ul>
-          </nav>
-        </div>
+<section class="mbc-mainmenu-area bg-light shadow-sm">
+  <!-- Topbar -->
+  <div class="bg-primary text-white py-2">
+    <div class="container">
+      <div class="d-flex align-items-center">
+        <h1 class="m-0 h5 fw-bold">Admin Panel</h1>
       </div>
     </div>
+  </div>
+
+  <!-- Main Menu -->
+  <div class="container py-3">
+    <nav>
+      <ul class="nav d-flex justify-content-between align-items-center flex-wrap">
+        <!-- เมนูทั่วไป -->
+        <li class="nav-item">
+          <a 
+            class="nav-link text-dark px-3 py-2 border rounded" 
+            [routerLink]="['/admin/message']" 
+            routerLinkActive="active text-white bg-primary"
+          >ข้อความหัวตาราง</a>
+        </li>
+        <li class="nav-item">
+          <a 
+            class="nav-link text-dark px-3 py-2 border rounded" 
+            [routerLink]="['/admin/table1']" 
+            routerLinkActive="active text-white bg-primary"
+          >ตารางทีเด็ดบอลวันนี้</a>
+        </li>
+        <li class="nav-item">
+          <a 
+            class="nav-link text-dark px-3 py-2 border rounded" 
+            [routerLink]="['/admin/table2']" 
+            routerLinkActive="active text-white bg-primary"
+          >ตารางบอลเด็ดวันนี้</a>
+        </li>
+        <li class="nav-item">
+          <a 
+            class="nav-link text-dark px-3 py-2 border rounded" 
+            [routerLink]="['/admin/table3']" 
+            routerLinkActive="active text-white bg-primary"
+          >เซียนบอลทางบ้าน</a>
+        </li>
+
+        <!-- กลุ่มจัดการ -->
+        <li class="nav-item">
+          <a 
+            class="nav-link text-dark px-3 py-2 border rounded" 
+            [routerLink]="['/admin/master']" 
+            routerLinkActive="active text-white bg-primary"
+          >จัดการเซียนบอล</a>
+        </li>
+        <li class="nav-item">
+          <a 
+            class="nav-link text-dark px-3 py-2 border rounded" 
+            [routerLink]="['/admin/users']" 
+            routerLinkActive="active text-white bg-primary"
+          >จัดการแอดมิน</a>
+        </li>
+        <li class="nav-item">
+          <a 
+            class="nav-link text-dark px-3 py-2 border rounded" 
+            [routerLink]="['/admin/league']" 
+            routerLinkActive="active text-white bg-primary"
+          >จัดการลีก</a>
+        </li>
+        <li class="nav-item">
+          <a 
+            class="nav-link text-dark px-3 py-2 border rounded" 
+            [routerLink]="['/admin/teams']" 
+            routerLinkActive="active text-white bg-primary"
+          >จัดการทีม</a>
+        </li>
+
+        <!-- ปุ่มออกจากระบบ -->
+        <li class="nav-item">
+          <button 
+            class="btn btn-danger px-4 py-2" 
+            (click)="logout()"
+          >ออกจากระบบ</button>
+        </li>
+      </ul>
+    </nav>
   </div>
 </section>

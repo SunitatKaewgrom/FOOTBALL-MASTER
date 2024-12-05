@@ -10,31 +10,42 @@ import { HttpResponse } from '@angular/common/http';
   standalone: true,
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './table3.component.html',
-  styleUrl: './table3.component.scss',
+  styleUrls: ['./table3.component.scss'],
   providers: [AdminService, UploadService]
-
 })
 
 export class Table3Component {
 
   data: any = [];
-  new_data = { name: '', statistic: ['3', '3', '3', '3', '3', '3', '3', '3', '3', '3'], message: '', odds: '', image: '', statics: '0' };
+  new_data = { 
+    name: '', 
+    statistic: ['3', '3', '3', '3', '3', '3', '3', '3', '3', '3'], 
+    message: '', 
+    odds: '', 
+    image: '', 
+    statics: '0' 
+  };
 
   imgUrl = 'https://admin.ballded789.co:3000/img/';
 
   currentFile?: File;
   edit: any = [];
 
-
   constructor(private uploadService: UploadService, private admin: AdminService) { }
-
 
   ngOnInit() {
     this.getHomeMaster();
   }
 
-  addHomeMAster() {
-    this.data.push({ name: '', statistic: ['3', '3', '3', '3', '3', '3', '3', '3', '3', '3'], message: '', odds: '', image: '', statics: '0' });
+  addHomeMaster() {
+    this.data.push({ 
+      name: '', 
+      statistic: ['3', '3', '3', '3', '3', '3', '3', '3', '3', '3'], 
+      message: '', 
+      odds: '', 
+      image: '', 
+      statics: '0' 
+    });
   }
 
   removeHomeMaster(index: number) {
@@ -43,9 +54,15 @@ export class Table3Component {
 
   saveHomeMaster() {
     this.admin.addTb3(this.new_data).subscribe((res) => {
-      // console.log(res);
       if (res.status == 200) {
-        this.new_data = { name: '', statistic: ['3', '3', '3', '3', '3', '3', '3', '3', '3', '3'], message: '', odds: '', image: '', statics: '0' };
+        this.new_data = { 
+          name: '', 
+          statistic: ['3', '3', '3', '3', '3', '3', '3', '3', '3', '3'], 
+          message: '', 
+          odds: '', 
+          image: '', 
+          statics: '0' 
+        };
         alert('บันทึกข้อมูลสำเร็จ');
         this.getHomeMaster();
       } else {
@@ -66,15 +83,11 @@ export class Table3Component {
       this.uploadService.upload(this.currentFile).subscribe({
         next: (event: any) => {
           if (event instanceof HttpResponse) {
-            // this.message = event.body.message;
             this.new_data.image = event.body.file.filename;
-            // console.log(this.new_data.image);
-
           }
         },
         error: (err: any) => {
-          if (err.error && err.error.message) {
-          } else { }
+          console.error(err);
         },
         complete: () => {
           this.currentFile = undefined;
@@ -86,16 +99,12 @@ export class Table3Component {
   getHomeMaster() {
     this.admin.getTb3().subscribe((res) => {
       this.data = res;
-      // push false to edit
       this.edit = new Array(res.length).fill(false);
-
     });
   }
 
   updateHomeMaster(id: any, ball: any) {
-    // console.log(ball);
     this.admin.updateTb3(id, ball).subscribe((res: any) => {
-      // console.log(res);
       if (res.status == 200) {
         this.getHomeMaster();
       }
@@ -118,7 +127,6 @@ export class Table3Component {
   deleteHomeMaster(id: any) {
     if (confirm('Are you sure you want to delete this record?')) {
       this.admin.deleteTb3(id).subscribe((res: any) => {
-        // console.log(res);
         if (res.status == 200) {
           this.getHomeMaster();
         }
@@ -138,14 +146,11 @@ export class Table3Component {
       this.uploadService.upload(this.currentFile).subscribe({
         next: (event: any) => {
           if (event instanceof HttpResponse) {
-            // this.message = event.body.message;
             this.data[index].image = event.body.file.filename;
           }
         },
         error: (err: any) => {
-          if (err.error && err.error.message) {
-          } else {
-          }
+          console.error(err);
         },
         complete: () => {
           this.currentFile = undefined;
@@ -154,5 +159,17 @@ export class Table3Component {
     }
   }
 
-
+  // เพิ่มฟังก์ชัน getIcon สำหรับแปลงค่า statistic เป็น URL ไอคอน
+  getIcon(stat: string): string {
+    switch (stat) {
+      case '1':
+        return '../../../assets/check-icon.svg'; // ไอคอนถูก
+      case '2':
+        return '../../../assets/cross-icon.svg'; // ไอคอนผิด
+      case '3':
+        return '../../../assets/minus-icon.svg'; // ไอคอนไม่ทราบ
+      default:
+        return '../../../assets/default-icon.svg'; // ไอคอนค่าเริ่มต้น
+    }
+  }
 }

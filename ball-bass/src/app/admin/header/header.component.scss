@@ -271,3 +271,10 @@ dl, ol, ul {
 .mainmenu ul li ul li a:hover {
   padding-left: 20px;
 }
+
+
+.nav-link:hover {
+  background-color: #f8f9fa;
+  color: #0056b3;
+  transition: all 0.3s ease;
+}

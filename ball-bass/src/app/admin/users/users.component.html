@@ -1,63 +1,130 @@
-@if (message!= '') {
-<div class="alert alert-{{status}}">
-  {{message}}
-</div>
-}
-<div class="box">
-  <div class="row">
-    <h3>เพิ่มข้อมูล Admin</h3>
+<div class="container my-4">
+  <!-- การแจ้งเตือน -->
+  <div *ngIf="message" class="alert alert-{{status}} mb-4">
+    {{ message }}
   </div>
-  <div class="row">
-    <div class="col-md-6">
-      <div class="form-group">
-        <label for="name">Username:</label>
-        <input type="text" id="name" class="form-control" [(ngModel)]="Admin.username" name="name" required>
+
+  <!-- ฟอร์มเพิ่มข้อมูล Admin -->
+  <div class="card shadow-sm border-0 mb-4">
+    <div class="card-body">
+      <h3 class="text-primary mb-3 fw-bold ">เพิ่มข้อมูล Admin</h3>
+      <div class="row g-3">
+        <!-- Username -->
+        <div class="col-md-6">
+          <label for="name" class="form-label fw-semibold">Username:</label>
+          <input 
+            type="text" 
+            id="name" 
+            class="form-control shadow-sm" 
+            [(ngModel)]="Admin.username" 
+            placeholder="กรอกชื่อผู้ใช้งาน" 
+            required
+          >
+        </div>
+
+        <!-- Password -->
+        <div class="col-md-6">
+          <label for="password" class="form-label fw-semibold">รหัสผ่าน:</label>
+          <input 
+            type="password" 
+            id="password" 
+            class="form-control shadow-sm" 
+            [(ngModel)]="Admin.password" 
+            placeholder="กรอกรหัสผ่าน" 
+            required
+          >
+        </div>
+      </div>
+
+      <!-- ปุ่มบันทึก -->
+      <div class="text-center mt-4">
+        <button 
+          class="btn btn-primary px-4 py-2 fw-bold shadow-sm" 
+          (click)="saveAdmin()" 
+          [disabled]="!Admin.username || !Admin.password"
+        >
+          บันทึกข้อมูล
+        </button>
       </div>
     </div>
+  </div>
 
-    <div class="col-md-6">
-      <!-- password -->
-      <div class="form-group">
-        <label for="password">รหัสผ่าน:</label>
-        <input type="password" id="password" class="form-control" [(ngModel)]="Admin.password" name="password" required>
+  <!-- ตารางแสดงข้อมูล Admin -->
+  <div class="card shadow-sm border-0">
+    <div class="card-body">
+      <h4 class="text-primary mb-3">ข้อมูล Admin</h4>
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered shadow-sm">
+          <thead class="bg-primary text-white">
+            <tr>
+              <th class="text-center">ลำดับ</th>
+              <th>ID</th>
+              <th>Username</th>
+              <th>Password</th>
+              <th class="text-center">การจัดการ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let admin of masterList; let i = index;">
+              <!-- ลำดับ -->
+              <td class="text-center">{{ i + 1 }}</td>
+
+              <!-- ID -->
+              <td>{{ admin.id }}</td>
+
+              <!-- Username -->
+              <td>
+                <ng-container *ngIf="!edit[i]; else editUsername">
+                  {{ admin.username }}
+                </ng-container>
+                <ng-template #editUsername>
+                  <input 
+                    type="text" 
+                    class="form-control shadow-sm" 
+                    [(ngModel)]="admin.username" 
+                    placeholder="แก้ไขชื่อผู้ใช้งาน" 
+                    required
+                  >
+                </ng-template>
+              </td>
+
+              <!-- Password -->
+              <td>
+                <ng-container *ngIf="!edit[i]; else editPassword">
+                  {{ admin.password }}
+                </ng-container>
+                <ng-template #editPassword>
+                  <input 
+                    type="text" 
+                    class="form-control shadow-sm" 
+                    [(ngModel)]="admin.password" 
+                    placeholder="แก้ไขรหัสผ่าน" 
+                    required
+                  >
+                </ng-template>
+              </td>
+
+              <!-- การจัดการ -->
+              <td class="text-center">
+                <ng-container *ngIf="!edit[i]; else editActions">
+                  <button class="btn btn-warning btn-sm me-2" (click)="updateAdminClick(i)">แก้ไข</button>
+                  <button 
+                    *ngIf="masterList.length > 1" 
+                    class="btn btn-danger btn-sm" 
+                    (click)="deleteAdmin(admin.id)"
+                  >
+                    ลบ
+                  </button>
+                </ng-container>
+                <ng-template #editActions>
+                  <button class="btn btn-success btn-sm me-2" (click)="updateAdmin(admin.id, admin)">บันทึก</button>
+                  <button class="btn btn-secondary btn-sm" (click)="cancelEdit(i)">ยกเลิก</button>
+                </ng-template>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
-
-    <!-- ปุ่มบันทึก -->
-    <button class="btn btn-primary col-3 top" (click)="saveAdmin()"
-      [disabled]="Admin.username == '' || Admin.password == ''">บันทึก</button>
   </div>
-</div>
-
-<!-- ตารางแสดง Admin ประกอบด้วย ID, ชื่อ, รูป, แก้ไข, ลบ -->
-<div class="box">
-  <div class="row">
-    <h3>ข้อมูล Admin</h3>
-  </div>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>ลำดับ</th>
-        <th>ID</th>
-        <th>Username</th>
-        <th>Password</th>
-        <th>แก้ไข</th>
-        <th>ลบ</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let ball of masterList; let i = index;">
-        <td>{{i+1}}</td>
-        <td>{{ball.id}}</td>
-        @if (!edit[i]){<td>{{ball.username}}</td>}
-        @else{<td><input type="text" [(ngModel)]="ball.username" name="username" required></td>}
-        @if (!edit[i]){<td>{{ball.password}}</td>}
-        @else{<td><input type="text" [(ngModel)]="ball.password" name="password" required></td>}
-        @if (!edit[i]) {<td><button class="btn btn-warning" (click)="updateAdminClick(i)">แก้ไข</button></td>}
-        @else{<td><button class="btn btn-success" (click)="updateAdmin(ball.id, ball)">บันทึก</button>
-                  <button class="btn btn-danger" (click)="cancelEdit(i)">ยกเลิก</button></td>}
-        @if (!edit[i]) {<td><button *ngIf="masterList.length > 1" class="btn btn-danger" (click)="deleteAdmin(ball.id)">ลบ</button></td>}
-      </tr>
-    </tbody>
-  </table>
 </div>
