@@ -1,32 +1,92 @@
+<div class="row g-3">
+  <div class="col-12 col-md-4" *ngFor="let item of data">
+    <div 
+      class="card shadow-lg border-0 p-3 rounded-3 text-white position-relative hover:scale-105 hover:shadow-xl transition-all"
+      style="
+        background-image: url('../../assets/hot-bg.webp'); 
+        background-size: cover; 
+        background-position: center; 
+        background-repeat: no-repeat;
+        overflow: hidden;
+      "
+    >
+      <!-- Overlay -->
+      <div 
+        class="position-absolute top-0 start-0 w-100 h-100"
+        style="
+          background: rgba(23, 42, 73, 0.20); 
+          z-index: 1; 
+          border-radius: 12px;
+        "
+      ></div>
 
-<div class="row g-2 mb-2 bg ">
-  <div class="col-4" *ngFor="let item of data">
-    <div class="hot-bg-1 bd-round-tl-tr bd-round-bl-br p-2 text-white">
-      <div class="d-flex justify-content-between align-items-center">
-
-        <div class="d-flex">
-          <div class="avatar avatar-40 border-0 me-2"
-            style="background-image:url('{{imgUrl}}{{item.image}}')"></div>
+      <!-- Content -->
+      <div class="position-relative" style="z-index: 2;">
+        <!-- Header Section -->
+        <div class="d-flex align-items-center mb-3">
+          <div 
+            class="avatar me-3"
+            style="
+              background-image: url('{{imgUrl}}{{item.image}}'); 
+              background-size: cover; 
+              background-position: center; 
+              border-radius: 50%; 
+              width: 50px; 
+              height: 50px; 
+              border: 2px solid white;
+            "
+          ></div>
           <div>
-            <div class="fs-7">{{item.name}}</div>
-            <div class="text-muted">
-              สถิติ:
-              <label *ngFor="let item2 of item.statistic">
-                <img class="ich-14" *ngIf="item2 == '1'" src="../../../assets/check-icon-2-2.svg" alt="">
-                <img class="ich-14" *ngIf="item2 == '2'" src="../../../assets/cross-icon-2-2.svg" alt="">
-                <img class="ich-14" *ngIf="item2 == '3'" src="../../../assets/minus-icon-2.svg" alt="">
-              </label>
+            <h5 class="fw-bold mb-0 text-white">{{item.name}}</h5>
+            <small class="text-white">สถิติ:</small>
+            <div class="d-flex mt-1">
+              <ng-container *ngFor="let item2 of item.statistic">
+                <img 
+                  class="me-1"
+                  *ngIf="item2 === '1'" 
+                  src="../../../assets/check-icon-2-2.svg" 
+                  alt="Win" 
+                  style="width: 16px;"
+                >
+                <img 
+                  class="me-1"
+                  *ngIf="item2 === '2'" 
+                  src="../../../assets/cross-icon-2-2.svg" 
+                  alt="Lose" 
+                  style="width: 16px;"
+                >
+                <img 
+                  class="me-1"
+                  *ngIf="item2 === '3'" 
+                  src="../../../assets/minus-icon-2.svg" 
+                  alt="Draw" 
+                  style="width: 16px;"
+                >
+              </ng-container>
             </div>
+          </div>
+          <div class="ms-auto bg-success text-white px-3 py-1 rounded-pill fw-bold" style="font-size: 0.9rem;">
+            {{item.statics}}%
           </div>
         </div>
 
-        <div class="hot-bg-2 text-center fs-6 px-2" style="color:#fbf3c5;border-radius: 4px;" class="statistic">{{item.statics}}%</div>
-      </div>
+        <!-- Content Section -->
+        <div class="bg-secondary rounded p-2 mb-2">
+          <p class="mb-0 text-light small">{{item.message}}</p>
+        </div>
 
-      <div class="d-flex hot-bg-2 text-muted px-2 mt-1 bd-round-tl-tr bd-round-bl-br fs-8">
-        <div class="message" style="color: #bebdb5;">{{item.message}}</div>
+        <!-- Footer Section -->
+        <div class="d-flex justify-content-between align-items-center">
+          <span class="text-warning fw-bold" style="font-size: 1rem;">{{item.odds}}</span>
+          <a 
+            href="#" 
+            class="btn btn-sm btn-outline-light rounded-pill px-3"
+            style="font-size: 0.85rem;"
+          >
+            ดูรายละเอียด
+          </a>
+        </div>
       </div>
-      <div class="fs-7 px-2 text-end">{{item.odds}}</div>
     </div>
   </div>
 </div>

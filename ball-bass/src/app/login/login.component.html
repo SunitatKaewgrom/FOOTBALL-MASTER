@@ -1,25 +1,54 @@
-<div class="box center-half-flex container">
-  <h1>LOGIN</h1>
-
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-  <div class="row">
-    <div class="col-md-12">
-      <label for="username">Username</label>
-      <input type="text" id="username" class="form-control" formControlName="username">
+<div class="container d-flex justify-content-center align-items-center vh-100">
+  <div class="card shadow-lg border-0 p-5" 
+       style="
+         max-width: 500px; 
+         width: 100%; 
+         border-radius: 15px; 
+         background: linear-gradient(to bottom right, #ffffff, #f8f9fa);
+       ">
+    <!-- Header -->
+    <div class="text-center mb-4">
+      <h1 class="text-primary fw-bold">Login</h1>
+      <p class="text-muted">เข้าสู่ระบบเพื่อดำเนินการต่อ</p>
     </div>
 
-    <div class="col-md-12 top">
-      <label for="password">Password</label>
-      <input type="password" id="password" class="form-control" formControlName="password">
-    </div>
-  </div>
+    <!-- Form -->
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <!-- Username -->
+      <div class="mb-3">
+        <label for="username" class="form-label fw-semibold">Username</label>
+        <input 
+          type="text" 
+          id="username" 
+          class="form-control shadow-sm" 
+          formControlName="username" 
+          placeholder="กรอกชื่อผู้ใช้งาน" 
+          required>
+      </div>
 
-  <div class="row top">
-    <div class="col-12">
-      <button type="submit" class="btn btn-success" [disabled]="!loginForm.valid">Login</button>
-    </div>
-  </div>
+      <!-- Password -->
+      <div class="mb-3">
+        <label for="password" class="form-label fw-semibold">Password</label>
+        <input 
+          type="password" 
+          id="password" 
+          class="form-control shadow-sm" 
+          formControlName="password" 
+          placeholder="กรอกรหัสผ่าน" 
+          required>
+      </div>
 
-</form>
+      <!-- Button -->
+      <div class="d-grid">
+        <button 
+          type="submit" 
+          class="btn btn-primary fw-bold shadow-sm py-2" 
+          [disabled]="!loginForm.valid">
+          Login
+        </button>
+      </div>
+    </form>
+
+
+    
 </div>
-

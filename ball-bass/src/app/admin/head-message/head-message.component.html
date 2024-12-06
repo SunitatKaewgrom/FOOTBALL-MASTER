@@ -1,84 +1,83 @@
 <div class="container mt-4">
-    <!-- หัวข้อ -->
-    <div class="row">
-      <div class="col-12 text-center mb-4">
-        <h1 class="display-4 text-primary border-bottom pb-3">ข้อความหัวตาราง</h1>
-        <p class="text-muted">ปรับแต่งข้อความและรูปภาพสำหรับหัวตารางของคุณ</p>
-      </div>
-    </div>
-  
-    <!-- ฟิลด์ข้อความ -->
-    <div class="row mb-4">
-      <div class="col-12">
-        <label for="message" class="form-label fw-bold">ข้อความ:</label>
-        <textarea 
-          id="message" 
-          [(ngModel)]="message.message" 
-          class="form-control" 
-          placeholder="ระบุข้อความที่ต้องการ" 
-          rows="4">
-        </textarea>
-      </div>
-    </div>
-  
-    <!-- รูปภาพที่ 1 -->
-    <div class="row align-items-center mb-4">
-      <div class="col-md-4 text-center">
-        <img 
-          *ngIf="message.image1 !== ''" 
-          src="{{this.imgUrl}}{{message.image1}}" 
-          alt="image1" 
-          class="img-thumbnail rounded shadow-sm w-100"
-          style="max-height: 200px; object-fit: cover;">
-      </div>
-      <div class="col-md-8">
-        <label for="image1" class="form-label fw-bold">เลือกรูปหน้าข้อความ:</label>
-        <input 
-          type="file" 
-          id="image1" 
-          class="form-control" 
-          (change)="selectFile1($event)">
-      </div>
-    </div>
-  
-    <!-- รูปภาพที่ 2 -->
-    <div class="row align-items-center mb-4">
-      <div class="col-md-4 text-center">
-        <img 
-          *ngIf="message.image2 !== ''" 
-          src="{{this.imgUrl}}{{message.image2}}" 
-          alt="image2" 
-          class="img-thumbnail rounded shadow-sm w-100"
-          style="max-height: 200px; object-fit: cover;">
-      </div>
-      <div class="col-md-8">
-        <label for="image2" class="form-label fw-bold">เลือกรูปไลน์:</label>
-        <input 
-          type="file" 
-          id="image2" 
-          class="form-control" 
-          (change)="selectFile2($event)">
-      </div>
-    </div>
-  
-    <!-- ปุ่มบันทึก -->
-    <div class="row">
-      <div class="col-12 text-end">
-        <ng-container *ngIf="message_status === 'update'; else elseTemplate">
-          <button 
-            class="btn btn-primary px-4 py-2"  
-            (click)="updateMessage()">
-            บันทึกการแก้ไข
-          </button>
-        </ng-container>
-        <ng-template #elseTemplate>
-          <button 
-            class="btn btn-success px-4 py-2"  
-            (click)="saveMessage()">
-            บันทึกใหม่
-          </button>
-        </ng-template>
-      </div>
+<!-- หัวข้อ -->
+<div class="row justify-content-center mb-5">
+  <div class="col-lg-8 col-md-10 text-center">
+    <h4 class="display-6 fw-bold text-primary border-bottom pb-3">จัดการหัวตาราง</h4>
+  </div>
+</div>
+
+
+  <!-- ฟิลด์ข้อความ -->
+  <div class="row mb-4">
+    <div class="col-12">
+      <label for="message" class="form-label fw-bold">ข้อความ:</label>
+      <textarea 
+        id="message" 
+        [(ngModel)]="message.message" 
+        class="form-control shadow-sm border-light" 
+        placeholder="ระบุข้อความที่ต้องการ" 
+        rows="4">
+      </textarea>
     </div>
   </div>
-  
+
+  <!-- รูปภาพที่ 1 -->
+  <div class="row align-items-center mb-4">
+    <div class="col-md-4 text-center">
+      <img 
+        *ngIf="message.image1 !== ''" 
+        [src]="imgUrl + message.image1" 
+        alt="image1" 
+        class="img-thumbnail rounded shadow w-100"
+        style="max-height: 200px; object-fit: cover;">
+    </div>
+    <div class="col-md-8">
+      <label for="image1" class="form-label fw-bold">เลือกรูปหน้าข้อความ:</label>
+      <input 
+        type="file" 
+        id="image1" 
+        class="form-control shadow-sm border-light" 
+        (change)="selectFile1($event)">
+    </div>
+  </div>
+
+  <!-- รูปภาพที่ 2 -->
+  <div class="row align-items-center mb-4">
+    <div class="col-md-4 text-center">
+      <img 
+        *ngIf="message.image2 !== ''" 
+        [src]="imgUrl + message.image2" 
+        alt="image2" 
+        class="img-thumbnail rounded shadow w-100"
+        style="max-height: 200px; object-fit: cover;">
+    </div>
+    <div class="col-md-8">
+      <label for="image2" class="form-label fw-bold">เลือกรูปไลน์:</label>
+      <input 
+        type="file" 
+        id="image2" 
+        class="form-control shadow-sm border-light" 
+        (change)="selectFile2($event)">
+    </div>
+  </div>
+
+  <!-- ปุ่มบันทึก -->
+  <div class="row">
+    <div class="col-12 text-end">
+      <ng-container *ngIf="message_status === 'update'; else elseTemplate">
+        <button 
+          class="btn btn-primary px-4 py-2 fw-bold shadow-sm border-light"  
+          (click)="updateMessage()">
+          บันทึกการแก้ไข
+        </button>
+      </ng-container>
+      <ng-template #elseTemplate>
+        <button 
+          class="btn btn-success px-4 py-2 fw-bold shadow-sm border-light"  
+          (click)="saveMessage()">
+          บันทึกใหม่
+        </button>
+      </ng-template>
+    </div>
+  </div>
+</div>

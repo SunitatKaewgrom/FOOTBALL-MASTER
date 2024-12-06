@@ -1,87 +1,226 @@
-@if (message!= '') {
-  <div class="alert alert-{{status}}">
-    {{message}}
-  </div>
-}
-<div class="box">
-  <div class="row">
-    <h3>เพิ่มข้อมูลทีม</h3>
+<div class="container my-4">
+  <!-- การแจ้งเตือน -->
+  <div *ngIf="message" class="alert alert-{{status}} mb-4 shadow-sm">
+    {{ message }}
   </div>
 
-      <div class="form-group">
-        <label for="name">ชื่อทีม:</label>
-        <input type="text" id="name" class="form-group col-6" [(ngModel)]="Team.name" name="name" required>
-      </div>
+  <!-- ฟอร์มเพิ่มข้อมูลทีม -->
+  <div class="card shadow-lg border-0 mb-4">
+    <div class="card-body">
+      <h4 class="text-primary fw-bold mb-3">
+        <i class="bi bi-plus-circle"></i> เพิ่มข้อมูลทีม
+      </h4>
+      <div class="row g-4">
+        <!-- ชื่อทีม -->
+        <div class="col-md-6">
+          <label for="name" class="form-label fw-semibold">ชื่อทีม:</label>
+          <input
+            type="text"
+            id="name"
+            class="form-control shadow-sm"
+            [(ngModel)]="Team.name"
+            placeholder="กรอกชื่อทีม"
+            required
+          />
+        </div>
 
-      <!-- เลือกลีก -->
-      <div class="form-group top">
-        <label for="league_id">เลือกลีก:</label>
-        <select id="league_id" class="form-group" [(ngModel)]="Team.league_id" name="league_id" required>
-          <option *ngFor="let league of leagueList" [value]="league.id">{{league.name}}</option>
-        </select>
-      </div>
+        <!-- เลือกลีก -->
+        <div class="col-md-6">
+          <label for="league_id" class="form-label fw-semibold">เลือกลีก:</label>
+          <select
+            id="league_id"
+            class="form-select shadow-sm"
+            [(ngModel)]="Team.league_id"
+            required
+          >
+            <option value="" disabled>-- กรุณาเลือกลีก --</option>
+            <option *ngFor="let league of leagueList" [value]="league.id">
+              {{ league.name }}
+            </option>
+          </select>
+        </div>
 
-      <div class="upload">
-        @if (Team.image!= ''){
-        <img src="{{this.imgUrl}}{{Team.image}}" alt="image" width="100" height="100">
-        }
-        <br>
-        <label for="upload">เลือกรูปทีม:</label>
-        <input type="file" id="upload" (change)="selectFile($event)"/>
+        <!-- อัปโหลดรูปภาพ -->
+        <div class="col-md-6">
+          <label for="upload" class="form-label fw-semibold">เลือกรูปทีม:</label>
+          <input
+            type="file"
+            id="upload"
+            class="form-control shadow-sm"
+            (change)="selectFile($event)"
+          />
+          <div class="mt-3 text-center">
+            <img
+              *ngIf="Team.image"
+              [src]="imgUrl + Team.image"
+              alt="รูปทีม"
+              class="img-thumbnail shadow-sm"
+              width="100"
+            />
+          </div>
+        </div>
       </div>
 
       <!-- ปุ่มบันทึก -->
-      <button class="btn btn-primary col-3" (click)="saveTeam()" [disabled]="Team.name == '' || Team.league_id == ''">บันทึก</button>
-</div>
-
-<!-- ตารางแสดงทีม ประกอบด้วย ID, ชื่อ, รูป, แก้ไข, ลบ -->
-<div class="box">
-  <div class="row">
-    <h3>ข้อมูลทีม</h3>
-  </div>
-  <div class="row">
-    <div class="col-6">
-      <input type="text" class="form-control" placeholder="ค้นหา" [(ngModel)]="keyword" name="search" (ngModelChange)="search()">
+      <div class="text-center mt-4">
+        <button
+          class="btn btn-primary px-4 py-2 fw-bold shadow-sm"
+          (click)="saveTeam()"
+          [disabled]="!Team.name || !Team.league_id"
+        >
+          <i class="bi bi-check-circle"></i> บันทึกข้อมูล
+        </button>
+      </div>
     </div>
   </div>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>ลำดับ</th>
-        <th>ID</th>
-        <th>ชื่อ</th>
-        <th>ลีก</th>
-        <th>รูป</th>
-        <th>แก้ไข</th>
-        <th>ลบ</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let ball of teamList; let i = index;">
-        <td>{{i+1}}</td>
-        <td>{{ball.id}}</td>
-        @if (!edit[i]){<td>{{ball.name}}</td>}
-        @else{<td><input type="text" [(ngModel)]="ball.name" name="name" required></td>}
 
-        @if (!edit[i]){<td>{{ball.league_name}}</td>}
-        @else{<td>
-          <select [(ngModel)]="ball.league_id" name="league_id" required>
-            <option *ngFor="let league of leagueList" [value]="league.id">{{league.name}}</option>
-          </select>
-        </td>}
+  <!-- ตารางแสดงข้อมูลทีม -->
+  <div class="card shadow-lg border-0">
+    <div class="card-body">
+      <h4 class="text-primary fw-bold mb-3">
+        <i class="bi bi-list-task"></i> ข้อมูลทีม
+      </h4>
 
-        @if (!edit[i]){<td><img *ngIf="ball.image!=''" src="{{this.imgUrl}}{{ball.image}}" alt="image" width="100" height="100"> <label *ngIf="ball.image == ''">ไม่มี</label></td>}
-        @else{<td><img *ngIf="ball.image!=''" src="{{this.imgUrl}}{{ball.image}}" alt="image" width="100" height="100"><br><input type="file" (change)="selectFileEdit($event, i)"/>
-        <!-- ลบรูป (set ball.image = '') -->
-        <button *ngIf="ball.image!=''" class="btn btn-danger" (click)="deleteImage(i)">ลบรูป</button>
-        </td>}
-        @if (!edit[i]) {<td><button class="btn btn-warning" (click)="updateTeamClick(i)">แก้ไข</button></td>}
-        @else{<td><button class="btn btn-success" (click)="updateTeam(ball.id, ball)">บันทึก</button>
-          <button class="btn btn-danger" (click)="cancelEdit(i)">ยกเลิก</button></td>}
-        @if (!edit[i]) {<td><button class="btn btn-danger" (click)="deleteTeam(ball.id)">ลบ</button></td>}
+      <!-- ค้นหา -->
+      <div class="row mb-4">
+        <div class="col-12 col-md-6">
+          <input
+            type="text"
+            class="form-control shadow-sm"
+            placeholder="ค้นหาทีม"
+            [(ngModel)]="keyword"
+            (ngModelChange)="search()"
+          />
+        </div>
+      </div>
 
-      </tr>
-    </tbody>
-  </table>
+      <!-- ตาราง -->
+      <div class="table-responsive">
+        <table class="table table-hover table-bordered shadow-sm">
+          <thead class="bg-primary text-white text-center">
+            <tr>
+              <th>ลำดับ</th>
+              <th>ID</th>
+              <th>ชื่อทีม</th>
+              <th>ลีก</th>
+              <th>รูปทีม</th>
+              <th>การจัดการ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let team of teamList; let i = index"
+              class="align-middle text-center"
+            >
+              <td>{{ i + 1 }}</td>
+              <td>{{ team.id }}</td>
+
+              <!-- ชื่อทีม -->
+              <td>
+                <ng-container *ngIf="!edit[i]; else editName">
+                  {{ team.name }}
+                </ng-container>
+                <ng-template #editName>
+                  <input
+                    type="text"
+                    class="form-control shadow-sm"
+                    [(ngModel)]="team.name"
+                    placeholder="แก้ไขชื่อทีม"
+                    required
+                  />
+                </ng-template>
+              </td>
+
+              <!-- ลีก -->
+              <td>
+                <ng-container *ngIf="!edit[i]; else editLeague">
+                  {{ team.league_name }}
+                </ng-container>
+                <ng-template #editLeague>
+                  <select
+                    class="form-select shadow-sm"
+                    [(ngModel)]="team.league_id"
+                    required
+                  >
+                    <option *ngFor="let league of leagueList" [value]="league.id">
+                      {{ league.name }}
+                    </option>
+                  </select>
+                </ng-template>
+              </td>
+
+              <!-- รูปทีม -->
+              <td>
+                <ng-container *ngIf="!edit[i]; else editImage">
+                  <img
+                    *ngIf="team.image"
+                    [src]="imgUrl + team.image"
+                    alt="รูปทีม"
+                    class="img-thumbnail shadow-sm"
+                    width="100"
+                  />
+                  <span *ngIf="!team.image" class="text-muted">ไม่มีรูป</span>
+                </ng-container>
+                <ng-template #editImage>
+                  <div>
+                    <img
+                      *ngIf="team.image"
+                      [src]="imgUrl + team.image"
+                      alt="รูปทีม"
+                      class="img-thumbnail shadow-sm mb-2"
+                      width="100"
+                    />
+                    <input
+                      type="file"
+                      class="form-control shadow-sm"
+                      (change)="selectFileEdit($event, i)"
+                    />
+                    <button
+                      *ngIf="team.image"
+                      class="btn btn-danger btn-sm mt-2"
+                      (click)="deleteImage(i)"
+                    >
+                      ลบรูป
+                    </button>
+                  </div>
+                </ng-template>
+              </td>
+
+              <!-- การจัดการ -->
+              <td>
+                <ng-container *ngIf="!edit[i]; else editActions">
+                  <button
+                    class="btn btn-warning btn-sm me-2"
+                    (click)="updateTeamClick(i)"
+                  >
+                    <i class="bi bi-pencil-square"></i> แก้ไข
+                  </button>
+                  <button
+                    class="btn btn-danger btn-sm"
+                    (click)="deleteTeam(team.id)"
+                  >
+                    <i class="bi bi-trash"></i> ลบ
+                  </button>
+                </ng-container>
+                <ng-template #editActions>
+                  <button
+                    class="btn btn-success btn-sm me-2"
+                    (click)="updateTeam(team.id, team)"
+                  >
+                    <i class="bi bi-check-circle"></i> บันทึก
+                  </button>
+                  <button
+                    class="btn btn-secondary btn-sm"
+                    (click)="cancelEdit(i)"
+                  >
+                    <i class="bi bi-x-circle"></i> ยกเลิก
+                  </button>
+                </ng-template>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
-

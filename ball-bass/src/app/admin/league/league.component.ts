@@ -140,17 +140,27 @@ export class LeagueComponent {
     // console.log(ball);
 
     this.admin.updateLeague(id, ball).subscribe((res: any) => {
-      // console.log(res);
       if (res.status == 200) {
         this.message = 'อัพเดตข้อมูลลีกสำเร็จ';
         this.status = 'success';
-        this.getLeague();
+    
+        // กำหนดเวลาการแสดงข้อความ 3 วินาที
+        setTimeout(() => {
+          this.message = '';
+        }, 3000);
+    
+        this.getLeague(); // เรียกข้อมูลใหม่
       } else {
         this.message = res.message + '. ชื่อลีกซ้ำ';
-        this.status = 'danger'
+        this.status = 'danger';
+    
+        // กำหนดเวลาการแสดงข้อความ 5 วินาที
+        setTimeout(() => {
+          this.message = '';
+        }, 5000);
       }
-
     });
+    
   }
 
   updateLeagueClick(index: any) {
@@ -165,4 +175,6 @@ export class LeagueComponent {
   deleteImage(index: any) {
     this.masterList[index].image = '';
   }
+
+  
 }

@@ -2,11 +2,11 @@
   <!-- ส่วนหัว -->
   <div class="d-flex justify-content-between align-items-center mb-4">
     <h3 class="text-primary fw-bold">เพิ่มเซียนบอลทางบ้าน</h3>
-    <button class="btn btn-outline-primary btn-sm" (click)="addHomeMaster()">+ เพิ่มเซียนบอล</button>
+    <button class="btn btn-outline-primary btn-sm shadow-lg" (click)="addHomeMaster()">+ เพิ่มเซียนบอล</button>
   </div>
 
   <!-- ฟอร์มเพิ่มเซียนบอล -->
-  <div class="card mb-4 shadow-sm border-0">
+  <div class="card mb-4 shadow-lg border-0">
     <div class="card-body">
       <h5 class="text-secondary mb-3">ข้อมูลเซียนบอล</h5>
       <div class="row g-3">
@@ -16,7 +16,7 @@
           <input 
             type="text" 
             id="name" 
-            class="form-control shadow-sm" 
+            class="form-control shadow-lg" 
             [(ngModel)]="new_data.name" 
             placeholder="ชื่อเซียนบอลทางบ้าน" 
             required
@@ -30,7 +30,7 @@
             <div class="col-md-2" *ngFor="let stat of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; let i = index;">
               <label for="statistic-{{i}}" class="d-block text-center">ครั้งที่ {{i + 1}}</label>
               <select 
-                class="form-select shadow-sm" 
+                class="form-select shadow-lg" 
                 id="statistic-{{i}}" 
                 [(ngModel)]="new_data.statistic[i]" 
                 required
@@ -49,7 +49,7 @@
           <input 
             type="number" 
             id="statics" 
-            class="form-control shadow-sm" 
+            class="form-control shadow-lg" 
             [(ngModel)]="new_data.statics" 
             placeholder="สถิติ (%)" 
             required
@@ -62,7 +62,7 @@
           <input 
             type="text" 
             id="message" 
-            class="form-control shadow-sm" 
+            class="form-control shadow-lg" 
             [(ngModel)]="new_data.message" 
             placeholder="ข้อความ เช่น อิตาลี ซีเรียอา" 
             required
@@ -75,7 +75,7 @@
           <input 
             type="text" 
             id="odds" 
-            class="form-control shadow-sm" 
+            class="form-control shadow-lg" 
             [(ngModel)]="new_data.odds" 
             placeholder="ข้อความต่อ/รอง เช่น ต่อ อินเตอร์ มิลาน" 
             required
@@ -88,7 +88,7 @@
           <input 
             type="file" 
             id="upload" 
-            class="form-control shadow-sm" 
+            class="form-control shadow-lg" 
             (change)="selectFile($event)"
           >
           <div class="mt-3 text-center">
@@ -96,7 +96,7 @@
               *ngIf="new_data.image" 
               [src]="imgUrl + new_data.image" 
               alt="เซียนบอล" 
-              class="img-thumbnail shadow-sm" 
+              class="img-thumbnail shadow-lg" 
               width="150"
             >
           </div>
@@ -106,7 +106,7 @@
       <!-- ปุ่มบันทึก -->
       <div class="text-center mt-4">
         <button 
-          class="btn btn-primary px-4 py-2 fw-bold shadow-sm" 
+          class="btn btn-primary px-4 py-2 fw-bold shadow-lg" 
           (click)="saveHomeMaster()" 
           [disabled]="!new_data.name"
         >
@@ -119,9 +119,9 @@
   <!-- การแสดงข้อมูลเซียนบอล -->
   <div class="row g-3">
     <div class="col-md-6" *ngFor="let item of data; let i = index;">
-      <div class="card shadow-sm border-0">
+      <div class="card shadow-lg border-0">
         <!-- แสดงลำดับ -->
-        <div class="card-header bg-light text-secondary fw-semibold">
+        <div class="card-header bg-primary text-white d-flex  fw-semibold">
           คนที่ {{ i + 1 }}
         </div>
         <div class="card-body">
@@ -129,8 +129,8 @@
           <div class="d-flex justify-content-between align-items-center mb-3">
             <h5 class="fw-bold text-primary">{{ item.name }}</h5>
             <div>
-              <button class="btn btn-warning btn-sm me-2" (click)="updateHomeMasterClick(i)">แก้ไข</button>
-              <button class="btn btn-danger btn-sm" (click)="deleteHomeMaster(item.id)">ลบ</button>
+              <button class="btn btn-warning btn-sm me-2 shadow-lg" (click)="updateHomeMasterClick(i)">แก้ไข</button>
+              <button class="btn btn-danger btn-sm shadow-lg" (click)="deleteHomeMaster(item.id)">ลบ</button>
             </div>
           </div>
 
@@ -144,7 +144,7 @@
               <img 
                 [src]="getIcon(stat)" 
                 alt="icon" 
-                class="me-2" 
+                class="me-2 shadow-lg" 
                 width="24" 
               >
             </div>
@@ -156,7 +156,7 @@
               *ngIf="item.image" 
               [src]="imgUrl + item.image" 
               alt="เซียนบอล" 
-              class="img-thumbnail shadow-sm" 
+              class="img-thumbnail shadow-lg" 
               width="100"
             >
           </div>

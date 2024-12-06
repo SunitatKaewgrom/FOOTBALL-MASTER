@@ -1,125 +1,129 @@
 <div class="container my-4">
   <!-- การแจ้งเตือน -->
-  <div *ngIf="message" class="alert alert-{{status}} mb-4">
+  <div *ngIf="message" class="alert alert-{{status}} mb-4 shadow-sm">
     {{ message }}
   </div>
 
   <!-- ฟอร์มเพิ่มข้อมูลเซียนบอล -->
-  <div class="card shadow-sm border-0 mb-4">
+  <div class="card shadow-lg border-0 mb-4">
     <div class="card-body">
-      <h3 class="text-primary mb-3 fw-bold">เพิ่มข้อมูลเซียนบอล</h3>
-      <div class="row g-3">
+      <h4 class="text-primary fw-bold mb-3">
+        <i class="bi bi-plus-circle"></i> เพิ่มข้อมูลเซียนบอล
+      </h4>
+      <div class="row g-4">
         <!-- ชื่อเซียนบอล -->
         <div class="col-md-6">
           <label for="name" class="form-label fw-semibold">ชื่อเซียนบอล:</label>
-          <input 
-            type="text" 
-            id="name" 
-            class="form-control shadow-sm" 
-            [(ngModel)]="ballMaster.name" 
-            placeholder="กรอกชื่อเซียนบอล" 
+          <input
+            type="text"
+            id="name"
+            class="form-control shadow-sm"
+            [(ngModel)]="ballMaster.name"
+            placeholder="กรอกชื่อเซียนบอล"
             required
-          >
+          />
         </div>
 
-        <!-- อัปโหลดรูปภาพ -->
+        <!-- รูปเซียนบอล -->
         <div class="col-md-6">
           <label for="upload" class="form-label fw-semibold">เลือกรูปเซียนบอล:</label>
-          <input 
-            type="file" 
-            id="upload" 
-            class="form-control shadow-sm" 
+          <input
+            type="file"
+            id="upload"
+            class="form-control shadow-sm"
             (change)="selectFile($event)"
-          >
+          />
           <div class="mt-3 text-center">
-            <img 
-              *ngIf="ballMaster.image" 
-              [src]="imgUrl + ballMaster.image" 
-              alt="เซียนบอล" 
-              class="img-thumbnail shadow-sm" 
+            <img
+              *ngIf="ballMaster.image"
+              [src]="imgUrl + ballMaster.image"
+              alt="เซียนบอล"
+              class="img-thumbnail shadow-sm"
               width="100"
-            >
+            />
           </div>
         </div>
       </div>
 
       <!-- ปุ่มบันทึก -->
       <div class="text-center mt-4">
-        <button 
-          class="btn btn-primary px-4 py-2 fw-bold shadow-sm" 
-          (click)="saveBallMaster()" 
+        <button
+          class="btn btn-primary px-4 py-2 fw-bold shadow-sm"
+          (click)="saveBallMaster()"
           [disabled]="!ballMaster.name || !ballMaster.image"
         >
-          บันทึกข้อมูล
+          <i class="bi bi-check-circle"></i> บันทึกข้อมูล
         </button>
       </div>
     </div>
   </div>
 
   <!-- ตารางแสดงข้อมูลเซียนบอล -->
-  <div class="card shadow-sm border-0">
+  <div class="card shadow-lg border-0">
     <div class="card-body">
-      <h4 class="text-primary mb-3">ข้อมูลเซียนบอล</h4>
+      <h4 class="text-primary fw-bold mb-3">
+        <i class="bi bi-list-task"></i> ข้อมูลเซียนบอล
+      </h4>
       <div class="table-responsive">
-        <table class="table table-striped table-bordered shadow-sm">
-          <thead class="bg-primary text-white">
+        <table class="table table-hover table-bordered shadow-sm">
+          <thead class="bg-primary text-white text-center">
             <tr>
-              <th class="text-center">ลำดับ</th>
+              <th>ลำดับ</th>
               <th>ชื่อเซียนบอล</th>
-              <th class="text-center">รูปเซียนบอล</th>
-              <th class="text-center">การจัดการ</th>
+              <th>รูปเซียนบอล</th>
+              <th>การจัดการ</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let ball of masterList; let i = index;">
+            <tr *ngFor="let ball of masterList; let i = index" class="align-middle text-center">
               <!-- ลำดับ -->
-              <td class="text-center">{{ i + 1 }}</td>
+              <td>{{ i + 1 }}</td>
 
-              <!-- ชื่อ -->
+              <!-- ชื่อเซียนบอล -->
               <td>
                 <ng-container *ngIf="!edit[i]; else editName">
                   {{ ball.name }}
                 </ng-container>
                 <ng-template #editName>
-                  <input 
-                    type="text" 
-                    class="form-control shadow-sm" 
-                    [(ngModel)]="ball.name" 
-                    placeholder="แก้ไขชื่อเซียนบอล" 
+                  <input
+                    type="text"
+                    class="form-control shadow-sm"
+                    [(ngModel)]="ball.name"
+                    placeholder="แก้ไขชื่อเซียนบอล"
                     required
-                  >
+                  />
                 </ng-template>
               </td>
 
-              <!-- รูป -->
-              <td class="text-center">
+              <!-- รูปเซียนบอล -->
+              <td>
                 <ng-container *ngIf="!edit[i]; else editImage">
-                  <img 
-                    *ngIf="ball.image" 
-                    [src]="imgUrl + ball.image" 
-                    alt="รูปเซียนบอล" 
-                    class="img-thumbnail shadow-sm" 
+                  <img
+                    *ngIf="ball.image"
+                    [src]="imgUrl + ball.image"
+                    alt="รูปเซียนบอล"
+                    class="img-thumbnail shadow-sm"
                     width="100"
-                  >
+                  />
                   <span *ngIf="!ball.image" class="text-muted">ไม่มีรูป</span>
                 </ng-container>
                 <ng-template #editImage>
                   <div>
-                    <img 
-                      *ngIf="ball.image" 
-                      [src]="imgUrl + ball.image" 
-                      alt="รูปเซียนบอล" 
-                      class="img-thumbnail shadow-sm mb-2" 
+                    <img
+                      *ngIf="ball.image"
+                      [src]="imgUrl + ball.image"
+                      alt="รูปเซียนบอล"
+                      class="img-thumbnail shadow-sm mb-2"
                       width="100"
-                    >
-                    <input 
-                      type="file" 
-                      class="form-control shadow-sm" 
+                    />
+                    <input
+                      type="file"
+                      class="form-control shadow-sm"
                       (change)="selectFileEdit($event, i)"
-                    >
-                    <button 
-                      *ngIf="ball.image" 
-                      class="btn btn-danger btn-sm mt-2" 
+                    />
+                    <button
+                      *ngIf="ball.image"
+                      class="btn btn-danger btn-sm mt-2"
                       (click)="deleteImage(i)"
                     >
                       ลบรูป
@@ -129,14 +133,22 @@
               </td>
 
               <!-- การจัดการ -->
-              <td class="text-center">
+              <td>
                 <ng-container *ngIf="!edit[i]; else editActions">
-                  <button class="btn btn-warning btn-sm me-2" (click)="updateBallMasterClick(i)">แก้ไข</button>
-                  <button class="btn btn-danger btn-sm" (click)="deleteBallMaster(ball.id)">ลบ</button>
+                  <button class="btn btn-warning btn-sm me-2" (click)="updateBallMasterClick(i)">
+                    <i class="bi bi-pencil-square"></i> แก้ไข
+                  </button>
+                  <button class="btn btn-danger btn-sm" (click)="deleteBallMaster(ball.id)">
+                    <i class="bi bi-trash"></i> ลบ
+                  </button>
                 </ng-container>
                 <ng-template #editActions>
-                  <button class="btn btn-success btn-sm me-2" (click)="updateBallMaster(ball.id, ball)">บันทึก</button>
-                  <button class="btn btn-secondary btn-sm" (click)="cancelEdit(i)">ยกเลิก</button>
+                  <button class="btn btn-success btn-sm me-2" (click)="updateBallMaster(ball.id, ball)">
+                    <i class="bi bi-check-circle"></i> บันทึก
+                  </button>
+                  <button class="btn btn-secondary btn-sm" (click)="cancelEdit(i)">
+                    <i class="bi bi-x-circle"></i> ยกเลิก
+                  </button>
                 </ng-template>
               </td>
             </tr>

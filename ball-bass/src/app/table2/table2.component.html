@@ -11,61 +11,124 @@
 
 <table class="table-hover">
   <tr>
-    <th class="td-colume"><img src="{{imgUrl}}{{image2}}" class="line"></th>
+    <th class="td-colume text-center"><img src="{{imgUrl}}{{image2}}" class="line"></th>
     <th *ngFor="let dayMatch of data; let j = index;" class="bg-team-th">
-      <div class="card-dte">
+      <div 
+        class="card-dte rounded p-2 text-center text-white shadow-sm"
+        style="background: linear-gradient(90deg, #1A335D, #232F56); font-size: 1rem; font-weight: bold; text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.5);">
         {{convertDate(dayMatch.date)}}
       </div>
     </th>
+    
   </tr>
   <tr *ngFor="let master of master; let i = index;">
-    <td class="td-colume">
-      <div class="text-master p-2 one">
-        <img src="{{imgUrl}}{{master.image}}" alt="" srcset="" class="sean-img">
-        <div class="master-name " style="margin-left: 10px;">
-          <label class="master-main">{{master.name.split(' ')[0]}}</label>
-          <p class="master-sub">{{master.name.split(' ')[1]}}</p>
+    <td class="td-colume p-4 bg-dark text-white rounded-3 shadow-sm">
+      <!-- ส่วนข้อมูล Master -->
+      <div 
+        class="d-flex flex-row align-items-center justify-content-between p-3 rounded shadow-lg"
+        style="background: linear-gradient(40deg, rgba(35, 47, 86, 0.5), rgba(26, 51, 93, 0.5));"
+      >
+        <!-- รูปภาพ -->
+        <div class="d-flex align-items-center">
+          <div class="position-relative me-3">
+            <img 
+              src="{{imgUrl}}{{master.image}}" 
+              alt="Master Image" 
+              class="rounded-circle border border-white shadow-sm"
+              style="width: 70px; height: 70px; object-fit: cover;"
+            >
+            <span 
+              class="position-absolute bottom-0 end-0 bg-warning text-dark small px-2 py-1 rounded-circle shadow"
+              style="font-size: 0.75rem; border: 2px solid #fff;"
+            >
+              VIP
+            </span>
+          </div>
+    
+          <!-- ชื่อ Master -->
+          <div>
+            <h4 
+              class="fw-bold mb-0 text-white"
+              style="text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.6);"
+            >
+              {{master.name.split(' ')[0]}}
+            </h4>
+            <p 
+              class="mb-0 small text-light"
+              style="text-shadow: 0px 0px 3px rgba(255, 255, 255, 0.5);"
+            >
+              {{master.name.split(' ')[1]}}
+            </p>
+          </div>
+        </div>
+    
+        <!-- ส่วนข้อมูลสถิติ -->
+        <div class="d-flex align-items-center">
+          <div 
+            class="icon-container d-flex justify-content-center align-items-center me-2 rounded-circle"
+            style="width: 40px; height: 40px; background-color: #3a4a6b;"
+          >
+            <i class="bi bi-bar-chart-fill text-light fs-5"></i>
+          </div>
+    
+          <div>
+            <h6 class="text-uppercase text-white fw-bold mb-0">สถิติ</h6>
+            <h3 class="mb-0 fw-bold" 
+                style="color: #00ffb2; text-shadow: 0px 0px 5px #00ffb2;">
+              {{statistic[i].percent}}
+            </h3>
+          </div>
         </div>
       </div>
-      <div class="justify-content-end d-flex align-items-center me-2  two">
-        <h5  class="statistic">สถิติ</h5>
-        <h3 class="percents">&nbsp;{{statistic[i].percent}}</h3>
-      </div>
     </td>
-
+    
     <td *ngFor="let dayMatch of data; let j = index;" class="bg-team">
       <div *ngFor="let masterMatch of dayMatch.master; let k = index;">
-        <div *ngIf="masterMatch.id == master.id">
-          @if (masterMatch.match.winner === 'home') {
-          <br>
-          <label class="name-titles">{{masterMatch.match.away.name}}</label>
-          <br>
-          <img src="../../assets/star.svg" alt="" srcset="" class="star-img">
-          <label>&nbsp;{{masterMatch.match.home.name}}</label>
-          }@else if (masterMatch.match.winner === 'away') {
-            <br>
-          <label class="name-titles">{{masterMatch.match.home.name}}</label><br>
-          <img src="../../assets/star.svg" alt="" srcset="" class="star-img">
-          <label class="name-away">&nbsp;{{masterMatch.match.away.name}}</label>
-          }@else {
-          <label>&nbsp;{{masterMatch.match.home.name}}</label>
-          <label class="name-away">&nbsp;{{masterMatch.match.away.name}}</label>
-          }
-          <!-- เครื่องหมายทายถูก ผิด -->
-          <br> <br>
-          <div>
-            @if (masterMatch.match.winner == masterMatch.match.win && j != 0){
-              <div class="justify-content-end d-flex">
-            <img src="../../assets/check-icon-2-2.svg" alt="" srcset="" class="result-img">
+        <div *ngIf="masterMatch.id == master.id" class="p-3 bg-gradient rounded shadow-sm">
+          <!-- ชื่อทีม -->
+          <div class="text-center">
+            <div *ngIf="masterMatch.match.winner === 'home'; else awayTeam">
+              <label class="name-titles text-primary fw-bold">{{masterMatch.match.away.name}}</label>
+              <br>
+              <img src="../../assets/star.svg" alt="Star Icon" class="star-img mx-1">
+              <label class="text-success fw-bold">{{masterMatch.match.home.name}}</label>
+            </div>
+            <ng-template #awayTeam>
+              <div *ngIf="masterMatch.match.winner === 'away'; else drawMatch">
+                <label class="name-titles text-danger fw-bold">{{masterMatch.match.home.name}}</label>
+                <br>
+                <img src="../../assets/star.svg" alt="Star Icon" class="star-img mx-1">
+                <label class="text-primary fw-bold">{{masterMatch.match.away.name}}</label>
+              </div>
+            </ng-template>
+            <ng-template #drawMatch>
+              <label class="text-warning fw-bold">{{masterMatch.match.home.name}}</label>
+              <label class="text-warning fw-bold">&nbsp;{{masterMatch.match.away.name}}</label>
+            </ng-template>
           </div>
-            }@else if (masterMatch.match.winner != masterMatch.match.win && j != 0){
-              <div class="justify-content-end d-flex">
-            <img src="../../assets/cross-icon-2-2.svg" alt="" srcset="" class="result-img">
-          </div>
-            }
+    
+          <!-- ไอคอนแสดงผล -->
+          <div class="text-center mt-3">
+            <div *ngIf="masterMatch.match.winner == masterMatch.match.win && j != 0; else incorrectIcon">
+              <img 
+                src="../../assets/check-icon-2-2.svg" 
+                alt="Correct Icon" 
+                class="result-img mx-auto shadow-lg" 
+                style="width: 40px; height: 40px;"
+              >
+            </div>
+            <ng-template #incorrectIcon>
+              <img 
+                src="../../assets/cross-icon-2-2.svg" 
+                alt="Incorrect Icon" 
+                class="result-img mx-auto shadow-lg" 
+                style="width: 40px; height: 40px;"
+              >
+            </ng-template>
           </div>
         </div>
       </div>
     </td>
+    
   </tr>
 </table>
